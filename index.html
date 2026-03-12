@@ -3,175 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>用药打卡</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<title>健康打卡</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
 :root {
-  --bg: #f2f2f7;
-  --card: #fff;
-  --text: #1c1c1e;
-  --sub: #8e8e93;
-  --sep: #e5e5ea;
-  --blue: #007aff;
-  --green: #34c759;
-  --orange: #ff9500;
-  --purple: #af52de;
-  --red: #ff3b30;
+  --bg: #f2f2f7; --card: #fff; --text: #1c1c1e; --sub: #8e8e93;
+  --sep: #e5e5ea; --blue: #007aff; --green: #34c759; --red: #ff3b30;
 }
-
-body {
-  background: var(--bg);
-  font-family: 'Noto Sans SC', sans-serif;
-  color: var(--text);
-  min-height: 100vh;
-  max-width: 430px;
-  margin: 0 auto;
-  padding-bottom: 90px;
-}
+body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', sans-serif; min-height: 100vh; max-width: 430px; margin: 0 auto; padding-bottom: 88px; }
 
 /* ── Header ── */
-.header {
-  padding: 54px 20px 12px;
-}
-.header-top {
-  display: flex; justify-content: space-between; align-items: flex-start;
-}
-.header h1 {
-  font-size: 1.75rem; font-weight: 700; letter-spacing: -.02em;
-}
-.header .date {
-  font-size: .78rem; color: var(--sub); margin-top: 5px;
-}
-.day-chip {
-  background: var(--blue); color: #fff;
-  font-size: .7rem; font-weight: 700;
-  padding: 4px 10px; border-radius: 99px;
-  margin-top: 4px;
-  white-space: nowrap;
-}
+.header { padding: 52px 20px 10px; }
+.header-row { display: flex; justify-content: space-between; align-items: flex-end; }
+.header h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -.02em; }
+.date-sub { font-size: .75rem; color: var(--sub); margin-top: 4px; }
 
-/* ── All done banner ── */
-.done-banner {
-  margin: 0 16px 12px;
-  background: var(--green);
-  border-radius: 12px;
-  padding: 11px 16px;
-  color: #fff;
-  font-size: .88rem;
-  font-weight: 600;
-  text-align: center;
-  display: none;
-}
+/* ── Banners ── */
+.done-banner { margin: 0 16px 12px; background: var(--green); border-radius: 12px; padding: 11px 16px; color: #fff; font-size: .86rem; font-weight: 600; text-align: center; display: none; }
 .done-banner.show { display: block; }
-
-/* ── Notice ── */
-.notice {
-  margin: 0 16px 16px;
-  background: #fffbe6;
-  border-left: 3px solid #ff9500;
-  border-radius: 0 10px 10px 0;
-  padding: 8px 12px;
-  font-size: .72rem;
-  color: #7a5000;
-  line-height: 1.6;
-}
+.notice { margin: 0 16px 14px; background: #fffbe6; border-left: 3px solid #ff9500; border-radius: 0 10px 10px 0; padding: 8px 12px; font-size: .72rem; color: #7a5000; line-height: 1.6; }
 
 /* ── Section label ── */
-.sec-label {
-  font-size: .68rem; font-weight: 700;
-  letter-spacing: .1em; text-transform: uppercase;
-  color: var(--sub);
-  padding: 4px 20px 8px;
-}
+.sec-label { font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sub); padding: 14px 20px 7px; }
 
 /* ── Med card ── */
-.med-card {
-  margin: 0 16px 10px;
-  background: var(--card);
-  border-radius: 16px;
-  padding: 14px 16px;
-  box-shadow: 0 1px 3px rgba(0,0,0,.06);
-}
-.med-card.ended { opacity: .4; pointer-events: none; }
-.med-card.skip-today { opacity: .55; }
-
-/* top row */
-.card-top {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 12px;
-}
-.color-bar {
-  width: 4px; height: 36px; border-radius: 99px; flex-shrink: 0;
-}
-.med-info { flex: 1; }
-.med-name { font-size: .97rem; font-weight: 700; }
-.med-desc { font-size: .7rem; color: var(--sub); margin-top: 2px; }
-.course-tag {
-  font-size: .65rem; font-weight: 700;
-  padding: 3px 9px; border-radius: 99px;
-  white-space: nowrap;
-}
-
-/* dose row */
-.dose-row {
-  display: flex; align-items: center; gap: 8px;
-}
-.dose-dots {
-  display: flex; gap: 6px; flex: 1;
-}
-.dot {
-  width: 32px; height: 32px; border-radius: 50%;
-  border: 2px solid var(--sep);
-  background: var(--bg);
-  display: flex; align-items: center; justify-content: center;
-  font-size: .75rem; color: var(--sub);
-  cursor: pointer;
-  transition: all .15s;
-  flex-shrink: 0;
-  user-select: none;
-  -webkit-user-select: none;
-}
+.med-card { margin: 0 16px 10px; background: var(--card); border-radius: 16px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.med-card.ended { opacity: .42; pointer-events: none; }
+.card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 11px; }
+.color-bar { width: 4px; height: 36px; border-radius: 99px; flex-shrink: 0; }
+.med-info { flex: 1; min-width: 0; }
+.med-name { font-size: .95rem; font-weight: 700; }
+.med-desc { font-size: .7rem; color: var(--sub); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.course-tag { font-size: .63rem; font-weight: 700; padding: 3px 9px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; }
+.dose-row { display: flex; align-items: center; gap: 8px; }
+.dose-dots { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
+.dot { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--sep); background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: .73rem; color: var(--sub); cursor: pointer; transition: all .15s; flex-shrink: 0; user-select: none; -webkit-user-select: none; }
 .dot:active { transform: scale(.88); }
-.dot.filled {
-  border-color: var(--c);
-  background: var(--c);
-  color: #fff;
-  font-size: .85rem;
-}
-
-.dose-label {
-  font-size: .72rem; color: var(--sub); white-space: nowrap;
-  font-weight: 500;
-}
+.dot.filled { border-color: var(--c); background: var(--c); color: #fff; font-size: .85rem; }
+.dose-label { font-size: .72rem; color: var(--sub); white-space: nowrap; font-weight: 500; }
 .dose-label.complete { color: var(--green); font-weight: 700; }
-
-/* skip message */
-.skip-msg {
-  font-size: .72rem; color: var(--sub);
-  text-align: center; padding: 4px 0 0;
-  display: none;
-}
+.skip-msg { font-size: .72rem; color: var(--sub); padding: 5px 0 0; display: none; }
 .skip-msg.show { display: block; }
 
-/* ── Tab bar ── */
-.tabbar {
-  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 100%; max-width: 430px;
-  background: rgba(255,255,255,.9);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid var(--sep);
-  display: flex;
-  padding: 8px 0 env(safe-area-inset-bottom, 10px);
-}
-.tab-btn {
-  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px;
-  background: none; border: none; cursor: pointer;
-  color: var(--sub); font-family: 'Noto Sans SC', sans-serif; padding: 4px 0;
-  transition: color .15s;
-}
+/* ── Braces card ── */
+.braces-card { margin: 0 16px 10px; background: var(--card); border-radius: 16px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.braces-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.braces-info { flex: 1; }
+.braces-name { font-size: .95rem; font-weight: 700; }
+.braces-desc { font-size: .7rem; color: var(--sub); margin-top: 2px; }
+.braces-nums { display: flex; gap: 10px; margin-bottom: 10px; }
+.bnum { flex: 1; background: var(--bg); border-radius: 10px; padding: 9px 10px; text-align: center; }
+.bnum-val { font-size: 1.3rem; font-weight: 700; line-height: 1; }
+.bnum-label { font-size: .62rem; color: var(--sub); margin-top: 3px; }
+.braces-bar-wrap { margin-bottom: 6px; }
+.braces-bar-bg { height: 6px; background: var(--sep); border-radius: 99px; overflow: hidden; }
+.braces-bar-fill { height: 100%; border-radius: 99px; transition: width .5s; }
+.braces-bar-labels { display: flex; justify-content: space-between; font-size: .65rem; color: var(--sub); margin-top: 4px; }
+.change-note { font-size: .72rem; color: #ff3b30; font-weight: 600; text-align: center; margin-top: 6px; display: none; }
+.change-note.show { display: block; }
+
+/* ── History ── */
+.hist-wrap { padding: 4px 0 10px; }
+.hist-day { margin: 0 16px 12px; }
+.hist-date { font-size: .67rem; font-weight: 700; color: var(--sub); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 7px; padding-left: 2px; }
+.hist-card { background: var(--card); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+.hist-row { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--sep); }
+.hist-row:last-child { border-bottom: none; }
+.hist-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.hist-name { font-size: .83rem; flex: 1; }
+.hist-count { font-size: .7rem; color: var(--sub); }
+.hist-icon { font-size: .88rem; }
+.empty { text-align: center; padding: 60px 20px; color: var(--sub); font-size: .88rem; line-height: 1.9; }
+
+/* ── Settings ── */
+.settings-section { margin: 0 16px 20px; }
+.settings-card { background: var(--card); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+.settings-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--sep); cursor: pointer; transition: background .15s; }
+.settings-row:last-child { border-bottom: none; }
+.settings-row:active { background: var(--bg); }
+.s-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.s-name { font-size: .88rem; flex: 1; font-weight: 500; }
+.s-meta { font-size: .7rem; color: var(--sub); }
+.s-arrow { color: var(--sub); font-size: .8rem; }
+.add-btn { width: 100%; margin-top: 10px; padding: 13px; background: var(--blue); color: #fff; border: none; border-radius: 12px; font-size: .88rem; font-weight: 600; font-family: 'Noto Sans SC', sans-serif; cursor: pointer; }
+.add-btn.secondary { background: var(--card); color: var(--blue); border: 1.5px solid var(--blue); margin-top: 8px; }
+.danger-btn { width: 100%; margin-top: 8px; padding: 13px; background: var(--card); color: var(--red); border: 1.5px solid var(--red); border-radius: 12px; font-size: .88rem; font-weight: 600; font-family: 'Noto Sans SC', sans-serif; cursor: pointer; }
+
+/* ── Edit sheet (overlay) ── */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 200; display: none; align-items: flex-end; }
+.overlay.show { display: flex; }
+.sheet { background: var(--card); width: 100%; max-width: 430px; margin: 0 auto; border-radius: 24px 24px 0 0; padding: 20px 20px env(safe-area-inset-bottom, 24px); max-height: 90vh; overflow-y: auto; }
+.sheet-handle { width: 36px; height: 4px; background: var(--sep); border-radius: 99px; margin: 0 auto 18px; }
+.sheet-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; }
+.sheet-close { background: var(--bg); border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; font-size: .9rem; color: var(--sub); display: flex; align-items: center; justify-content: center; }
+.field-label { font-size: .72rem; font-weight: 600; color: var(--sub); margin-bottom: 6px; letter-spacing: .05em; text-transform: uppercase; }
+.field-input { width: 100%; border: 1.5px solid var(--sep); border-radius: 10px; padding: 10px 12px; font-size: .9rem; font-family: 'Noto Sans SC', sans-serif; color: var(--text); background: var(--bg); outline: none; margin-bottom: 14px; }
+.field-input:focus { border-color: var(--blue); }
+.stepper { display: flex; align-items: center; gap: 0; margin-bottom: 14px; border: 1.5px solid var(--sep); border-radius: 10px; overflow: hidden; background: var(--bg); }
+.stepper-btn { width: 44px; height: 42px; border: none; background: none; font-size: 1.3rem; color: var(--blue); cursor: pointer; font-family: 'Noto Sans SC', sans-serif; flex-shrink: 0; }
+.stepper-btn:active { background: var(--sep); }
+.stepper-val { flex: 1; text-align: center; font-size: .95rem; font-weight: 600; }
+.color-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.color-swatch { width: 32px; height: 32px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: all .15s; flex-shrink: 0; }
+.color-swatch.selected { border-color: var(--text); transform: scale(1.15); }
+.toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; margin-bottom: 14px; }
+.toggle-label { font-size: .88rem; }
+.toggle { width: 48px; height: 28px; background: var(--sep); border-radius: 99px; position: relative; cursor: pointer; transition: background .2s; flex-shrink: 0; }
+.toggle.on { background: var(--green); }
+.toggle::after { content: ''; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; background: #fff; border-radius: 50%; transition: transform .2s; box-shadow: 0 1px 4px rgba(0,0,0,.2); }
+.toggle.on::after { transform: translateX(20px); }
+.save-btn { width: 100%; padding: 13px; background: var(--blue); color: #fff; border: none; border-radius: 12px; font-size: .95rem; font-weight: 700; font-family: 'Noto Sans SC', sans-serif; cursor: pointer; margin-top: 4px; }
+.del-link { display: block; text-align: center; color: var(--red); font-size: .8rem; margin-top: 14px; cursor: pointer; padding: 6px; }
+
+/* ── Tabbar ── */
+.tabbar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 430px; background: rgba(255,255,255,.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-top: 1px solid var(--sep); display: flex; padding: 8px 0 env(safe-area-inset-bottom, 10px); }
+.tab-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; background: none; border: none; cursor: pointer; color: var(--sub); font-family: 'Noto Sans SC', sans-serif; padding: 4px 0; transition: color .15s; }
 .tab-btn.active { color: var(--blue); }
 .tab-icon { font-size: 1.35rem; }
 .tab-label { font-size: .6rem; font-weight: 600; }
@@ -180,353 +127,538 @@ body {
 .page { display: none; }
 .page.active { display: block; }
 
-/* ── History ── */
-.hist-wrap { padding: 0 0 10px; }
-.hist-day { margin: 0 16px 12px; }
-.hist-date { font-size: .68rem; font-weight: 700; color: var(--sub); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 7px; padding-left: 2px; }
-.hist-card { background: var(--card); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
-.hist-row { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--sep); }
-.hist-row:last-child { border-bottom: none; }
-.hist-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.hist-name { font-size: .84rem; flex: 1; }
-.hist-count { font-size: .72rem; color: var(--sub); }
-.hist-icon { font-size: .9rem; }
-.empty { text-align: center; padding: 60px 20px; color: var(--sub); font-size: .88rem; line-height: 1.9; }
-
 /* ── Toast ── */
-.toast {
-  position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(8px);
-  background: rgba(28,28,30,.88); backdrop-filter: blur(8px);
-  color: #fff; padding: 9px 20px; border-radius: 99px;
-  font-size: .8rem; font-weight: 500;
-  opacity: 0; transition: all .22s; z-index: 999;
-  white-space: nowrap; pointer-events: none;
-}
+.toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(8px); background: rgba(28,28,30,.88); backdrop-filter: blur(8px); color: #fff; padding: 9px 20px; border-radius: 99px; font-size: .8rem; font-weight: 500; opacity: 0; transition: all .22s; z-index: 999; white-space: nowrap; pointer-events: none; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-/* ── Setup ── */
-.setup {
-  position: fixed; inset: 0; background: rgba(0,0,0,.35);
-  display: flex; align-items: flex-end; z-index: 500;
-}
-.setup-sheet {
-  background: #fff; width: 100%; max-width: 430px; margin: 0 auto;
-  border-radius: 24px 24px 0 0; padding: 26px 20px 48px;
-}
-.setup-sheet h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
-.setup-sheet p { font-size: .8rem; color: var(--sub); line-height: 1.6; margin-bottom: 20px; }
-.setup-label { font-size: .76rem; font-weight: 600; margin-bottom: 8px; }
-.setup-input {
-  width: 100%; border: 1.5px solid var(--sep); border-radius: 10px;
-  padding: 11px 13px; font-size: .93rem; font-family: 'Noto Sans SC', sans-serif;
-  color: var(--text); background: var(--bg); outline: none; margin-bottom: 16px;
-}
-.setup-input:focus { border-color: var(--blue); }
-.setup-go {
-  width: 100%; padding: 14px; border-radius: 12px; border: none;
-  background: var(--blue); color: #fff;
-  font-size: .95rem; font-weight: 700; font-family: 'Noto Sans SC', sans-serif; cursor: pointer;
-}
 </style>
 </head>
 <body>
 
-<!-- Setup -->
-<div class="setup" id="setup">
-  <div class="setup-sheet">
-    <h2>💊 用药打卡</h2>
-    <p>已根据处方设置好所有药品信息，确认开始用药日期即可使用。</p>
-    <div class="setup-label">开始用药日期（眼药水 + 异维A酸同步开始）</div>
-    <input type="date" class="setup-input" id="setupDate">
-    <button class="setup-go" onclick="startApp()">开始打卡</button>
+<!-- Today -->
+<div class="page active" id="pg-today">
+  <div class="header">
+    <div class="header-row">
+      <h1>今日打卡</h1>
+    </div>
+    <div class="date-sub" id="dateLabel"></div>
+  </div>
+  <div class="done-banner" id="doneBanner">🎉 今日全部完成！</div>
+  <div class="notice" id="eyeNotice">💡 连续滴两种眼药水需间隔 <strong>5–10 分钟</strong></div>
+  <div id="medsContainer"></div>
+  <div id="bracesContainer"></div>
+</div>
+
+<!-- History -->
+<div class="page" id="pg-history">
+  <div class="header"><h1>打卡记录</h1></div>
+  <div class="hist-wrap" id="histWrap"><div class="empty">📭 还没有记录</div></div>
+</div>
+
+<!-- Settings -->
+<div class="page" id="pg-settings">
+  <div class="header"><h1>管理</h1></div>
+
+  <div class="sec-label">用药</div>
+  <div class="settings-section">
+    <div class="settings-card" id="medsSettingsList"></div>
+    <button class="add-btn" onclick="openAddMed()">＋ 添加新药品</button>
+  </div>
+
+  <div class="sec-label">牙套</div>
+  <div class="settings-section">
+    <div class="settings-card">
+      <div class="settings-row" onclick="openEditBraces()">
+        <span class="s-dot" style="background:#00b4d8"></span>
+        <span class="s-name">牙套进度设置</span>
+        <span class="s-meta" id="bracesSettingsMeta"></span>
+        <span class="s-arrow">›</span>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- App -->
-<div id="app" style="display:none">
+<!-- Tabbar -->
+<div class="tabbar">
+  <button class="tab-btn active" onclick="showPage('today',this)"><span class="tab-icon">💊</span><span class="tab-label">今日</span></button>
+  <button class="tab-btn" onclick="showPage('history',this)"><span class="tab-icon">📋</span><span class="tab-label">记录</span></button>
+  <button class="tab-btn" onclick="showPage('settings',this)"><span class="tab-icon">⚙️</span><span class="tab-label">管理</span></button>
+</div>
 
-  <!-- Today -->
-  <div class="page active" id="pg-today">
-
-    <div class="header">
-      <div class="header-top">
-        <div>
-          <h1>今日用药</h1>
-          <div class="date" id="dateLabel"></div>
-        </div>
-        <div class="day-chip" id="dayChip">第1天</div>
-      </div>
+<!-- Edit Med Sheet -->
+<div class="overlay" id="medOverlay" onclick="closeMedSheet(event)">
+  <div class="sheet" id="medSheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">
+      <span id="sheetTitle">编辑药品</span>
+      <button class="sheet-close" onclick="closeMedSheet()">✕</button>
     </div>
 
-    <div class="done-banner" id="doneBanner">🎉 今日全部用药完成！</div>
+    <div class="field-label">药品名称</div>
+    <input class="field-input" id="f-name" placeholder="例：埃美丁" maxlength="20">
 
-    <div class="notice">💡 连续滴两种眼药水需间隔 <strong>5–10 分钟</strong></div>
+    <div class="field-label">说明（可选）</div>
+    <input class="field-input" id="f-desc" placeholder="例：富马酸依美斯汀 · 每日3次" maxlength="40">
 
-    <div class="sec-label">眼药水</div>
+    <div class="field-label">颜色</div>
+    <div class="color-row" id="colorRow"></div>
 
-    <!-- 埃美丁 -->
-    <div class="med-card" id="mc0">
-      <div class="card-top">
-        <div class="color-bar" style="background:#007aff"></div>
-        <div class="med-info">
-          <div class="med-name">埃美丁</div>
-          <div class="med-desc">富马酸依美斯汀 · 每日3次 · 0.05ml</div>
-        </div>
-        <div class="course-tag" id="tag0" style="background:#e8f3ff;color:#007aff"></div>
-      </div>
-      <div class="dose-row">
-        <div class="dose-dots" id="dots0" style="--c:#007aff"></div>
-        <div class="dose-label" id="dlabel0">0 / 3</div>
-      </div>
+    <div class="field-label">每日次数</div>
+    <div class="stepper">
+      <button class="stepper-btn" onclick="stepDaily(-1)">−</button>
+      <span class="stepper-val" id="f-daily-val">2</span>
+      <button class="stepper-btn" onclick="stepDaily(1)">＋</button>
     </div>
 
-    <!-- 新泪然 -->
-    <div class="med-card" id="mc1">
-      <div class="card-top">
-        <div class="color-bar" style="background:#34c759"></div>
-        <div class="med-info">
-          <div class="med-name">新泪然</div>
-          <div class="med-desc">羟糖甘滴眼液 · 每日4次 · 0.25ml</div>
-        </div>
-        <div class="course-tag" id="tag1" style="background:#eafaf1;color:#34c759">长期</div>
-      </div>
-      <div class="dose-row">
-        <div class="dose-dots" id="dots1" style="--c:#34c759"></div>
-        <div class="dose-label" id="dlabel1">0 / 4</div>
-      </div>
+    <div class="toggle-row">
+      <span class="toggle-label">隔天服用（每2天一次）</span>
+      <div class="toggle" id="f-every-toggle" onclick="toggleEvery()"></div>
     </div>
 
-    <!-- 普拉洛芬 -->
-    <div class="med-card" id="mc2">
-      <div class="card-top">
-        <div class="color-bar" style="background:#ff9500"></div>
-        <div class="med-info">
-          <div class="med-name">普拉洛芬</div>
-          <div class="med-desc">普拉洛芬滴眼液 · 每日4次 · 0.05ml</div>
-        </div>
-        <div class="course-tag" id="tag2" style="background:#fff4e6;color:#ff9500"></div>
-      </div>
-      <div class="dose-row">
-        <div class="dose-dots" id="dots2" style="--c:#ff9500"></div>
-        <div class="dose-label" id="dlabel2">0 / 4</div>
-      </div>
-    </div>
+    <div class="field-label">疗程结束日期（留空 = 不限）</div>
+    <input class="field-input" id="f-endDate" type="date">
 
-    <div class="sec-label">胶囊</div>
-
-    <!-- 异维A酸 -->
-    <div class="med-card" id="mc3">
-      <div class="card-top">
-        <div class="color-bar" style="background:#af52de"></div>
-        <div class="med-info">
-          <div class="med-name">异维A酸胶囊</div>
-          <div class="med-desc">每两天1颗 · 连续2个月</div>
-        </div>
-        <div class="course-tag" id="tag3" style="background:#f5eeff;color:#af52de"></div>
-      </div>
-      <div class="dose-row">
-        <div class="dose-dots" id="dots3" style="--c:#af52de"></div>
-        <div class="dose-label" id="dlabel3"></div>
-      </div>
-      <div class="skip-msg" id="skipMsg3">💤 今天不用吃，明天再吃</div>
-    </div>
-
+    <button class="save-btn" onclick="saveMed()">保存</button>
+    <span class="del-link" id="delLink" onclick="deleteMed()">删除此药品</span>
   </div>
+</div>
 
-  <!-- History -->
-  <div class="page" id="pg-history">
-    <div class="header"><h1>打卡记录</h1></div>
-    <div class="hist-wrap" id="histWrap">
-      <div class="empty">📭 还没有记录<br>打卡后会显示在这里</div>
+<!-- Edit Braces Sheet -->
+<div class="overlay" id="bracesOverlay" onclick="closeBracesSheet(event)">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">
+      牙套设置
+      <button class="sheet-close" onclick="closeBracesSheet()">✕</button>
     </div>
-  </div>
-
-  <!-- Tabbar -->
-  <div class="tabbar">
-    <button class="tab-btn active" onclick="showPage('today',this)">
-      <span class="tab-icon">💊</span><span class="tab-label">今日</span>
-    </button>
-    <button class="tab-btn" onclick="showPage('history',this)">
-      <span class="tab-icon">📋</span><span class="tab-label">记录</span>
-    </button>
+    <div class="field-label">当前副数（现在戴第几副）</div>
+    <div class="stepper">
+      <button class="stepper-btn" onclick="stepBraces('cur',-1)">−</button>
+      <span class="stepper-val" id="b-cur-val">14</span>
+      <button class="stepper-btn" onclick="stepBraces('cur',1)">＋</button>
+    </div>
+    <div class="field-label">本副开始日期</div>
+    <input class="field-input" id="b-startDate" type="date">
+    <div class="field-label">每副佩戴天数</div>
+    <div class="stepper">
+      <button class="stepper-btn" onclick="stepBraces('days',-1)">−</button>
+      <span class="stepper-val" id="b-days-val">10</span>
+      <button class="stepper-btn" onclick="stepBraces('days',1)">＋</button>
+    </div>
+    <div class="field-label">总副数</div>
+    <div class="stepper">
+      <button class="stepper-btn" onclick="stepBraces('total',-1)">−</button>
+      <span class="stepper-val" id="b-total-val">19</span>
+      <button class="stepper-btn" onclick="stepBraces('total',1)">＋</button>
+    </div>
+    <button class="save-btn" onclick="saveBraces()">保存</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ─── Config ─────────────────────────────────────────
-const MEDS = [
-  { id:0, name:'埃美丁',   color:'#007aff', total:3, limitDays:7,  every:1 },
-  { id:1, name:'新泪然',   color:'#34c759', total:4, limitDays:0,  every:1 },
-  { id:2, name:'普拉洛芬', color:'#ff9500', total:4, limitDays:7,  every:1 },
-  { id:3, name:'异维A酸', color:'#af52de', total:1, limitDays:60, every:2 },
+// ─── Constants ──────────────────────────────────────
+const KEY = 'tracker_v6';
+const COLORS = ['#007aff','#34c759','#ff9500','#af52de','#00b4d8','#ff2d55','#ff3b30','#5856d6','#30b0c7','#32ade6'];
+
+const DEFAULT_MEDS = [
+  { id:'m1', name:'埃美丁',  desc:'富马酸依美斯汀 · 每日3次 · 0.05ml', color:'#007aff', daily:3, endDate:'2026-03-18', every:1 },
+  { id:'m2', name:'新泪然',  desc:'羟糖甘滴眼液 · 每日4次 · 0.25ml',   color:'#34c759', daily:4, endDate:'',           every:1 },
+  { id:'m3', name:'普拉洛芬',desc:'普拉洛芬滴眼液 · 每日4次 · 0.05ml', color:'#ff9500', daily:4, endDate:'2026-03-18', every:1 },
+  { id:'m4', name:'环孢素',  desc:'环孢素滴眼液 · 早晚各1次',           color:'#30b0c7', daily:2, endDate:'',           every:1 },
+  { id:'m5', name:'异维A酸', desc:'异维A酸胶囊 · 隔天1颗',             color:'#af52de', daily:1, endDate:'2026-04-29', every:2 },
 ];
-const KEY = 'meds_v5';
+const DEFAULT_BRACES = { currentSet:14, setStartDate:'2026-03-09', daysPerSet:10, totalSets:19 };
+
+// ─── State ──────────────────────────────────────────
 let S = {};
+let editingMedId = null; // null = add new
+let editingDaily = 2;
+let editingEvery = 1;
+let editingColor = '#007aff';
+let bracesTemp = {};
 
 // ─── Utils ──────────────────────────────────────────
-const todayStr = () => {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-};
-const daysBetween = (a, b) => Math.floor((new Date(b) - new Date(a)) / 86400000);
-const load = () => { try { S = JSON.parse(localStorage.getItem(KEY) || 'null') || {}; } catch(e) { S = {}; } };
+const todayStr = () => { const d=new Date(); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; };
+const p = n => String(n).padStart(2,'0');
+const daysBetween = (a,b) => Math.floor((new Date(b)-new Date(a))/86400000);
+const load = () => { try { S=JSON.parse(localStorage.getItem(KEY)||'null')||{}; } catch(e){S={};} };
 const save = () => localStorage.setItem(KEY, JSON.stringify(S));
 
-// ─── Setup ──────────────────────────────────────────
-function startApp() {
-  const d = document.getElementById('setupDate').value;
-  if (!d) { showToast('请选择日期'); return; }
-  S = { startDate: d, history: {} };
-  save();
-  document.getElementById('setup').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  renderToday();
+function ensureDefaults() {
+  if (!S.meds) S.meds = JSON.parse(JSON.stringify(DEFAULT_MEDS));
+  if (!S.braces) S.braces = { ...DEFAULT_BRACES };
+  if (!S.history) S.history = {};
 }
 
 // ─── Render Today ────────────────────────────────────
 function renderToday() {
   const today = todayStr();
-  if (!S.history) S.history = {};
   if (!S.history[today]) S.history[today] = {};
   const H = S.history[today];
-  const dayIdx = daysBetween(S.startDate, today);
 
-  // Header
+  // Date label
   const now = new Date();
   const wk = ['周日','周一','周二','周三','周四','周五','周六'];
   document.getElementById('dateLabel').textContent =
     `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 ${wk[now.getDay()]}`;
-  document.getElementById('dayChip').textContent = `第 ${dayIdx+1} 天`;
 
-  let allActiveDone = true;
+  // Show eye notice only if there are eye drop meds
+  const hasEyeDrops = S.meds.some(m => !m.endDate || today <= m.endDate);
+  document.getElementById('eyeNotice').style.display = hasEyeDrops ? '' : 'none';
 
-  MEDS.forEach(m => {
-    const mc = document.getElementById('mc' + m.id);
-    const dotsEl = document.getElementById('dots' + m.id);
-    const dlabel = document.getElementById('dlabel' + m.id);
-    const tag = document.getElementById('tag' + m.id);
-    const skipMsg = document.getElementById('skipMsg' + m.id);
+  // Meds
+  const container = document.getElementById('medsContainer');
+  let sectHtml = `<div class="sec-label">用药</div>`;
+  let allDone = true;
+  let hasMeds = false;
 
+  S.meds.forEach(m => {
+    const ended = m.endDate && today > m.endDate;
     const done = H[m.id] || 0;
-    const ended = m.limitDays > 0 && dayIdx >= m.limitDays;
-    const isSkipDay = m.every === 2 && dayIdx % 2 !== 0;
+    const isSkipDay = m.every === 2 && (daysBetween(m.endDate || '2026-01-01', today) % 2 !== 0);
+
+    // For skip day calculation: use first recorded history day as reference, or a fixed offset
+    // simpler: use absolute day number from epoch % 2
+    const epochDay = Math.floor(new Date(today).getTime() / 86400000);
+    const isSkip = m.every === 2 && epochDay % 2 !== 0;
+
+    if (!ended) hasMeds = true;
+    if (!ended && !isSkip && done < m.daily) allDone = false;
 
     // Course tag
-    if (m.limitDays > 0) {
+    let tagText = '', tagStyle = '';
+    if (m.endDate) {
       if (ended) {
-        tag.textContent = '已停药';
-        tag.style.background = '#f2f2f7'; tag.style.color = '#8e8e93';
+        tagText = '已停药';
+        tagStyle = `background:#f2f2f7;color:#8e8e93`;
       } else {
-        const rem = m.limitDays - dayIdx;
-        tag.textContent = `剩 ${rem} 天`;
-        if (rem <= 2) { tag.style.background = '#ffeeee'; tag.style.color = '#ff3b30'; }
+        const rem = daysBetween(today, m.endDate) + 1;
+        tagText = `剩 ${rem} 天`;
+        tagStyle = rem <= 3
+          ? `background:#ffeeee;color:#ff3b30`
+          : `background:${m.color}18;color:${m.color}`;
+      }
+    } else {
+      tagText = ''; tagStyle = '';
+    }
+
+    // Dots HTML
+    let dotsHtml = '';
+    if (!ended && !isSkip) {
+      for (let i = 0; i < m.daily; i++) {
+        const filled = i < done;
+        dotsHtml += `<div class="dot${filled?' filled':''}" style="--c:${m.color}" onclick="tapDot('${m.id}',${i})">${filled?'✓':i+1}</div>`;
       }
     }
 
-    // Card states
-    mc.classList.toggle('ended', ended);
-    if (skipMsg) skipMsg.classList.toggle('show', isSkipDay && !ended);
+    let labelText = '', labelClass = 'dose-label';
+    if (ended) { labelText = '已停药'; }
+    else if (isSkip) { labelText = '今日免服'; }
+    else if (done >= m.daily) { labelText = '✓ 完成'; labelClass = 'dose-label complete'; }
+    else { labelText = `${done} / ${m.daily}`; }
 
-    // Build dots
-    dotsEl.innerHTML = '';
-    if (ended) {
-      dlabel.textContent = '疗程结束';
-      dlabel.className = 'dose-label';
-      return;
-    }
-    if (isSkipDay) {
-      dlabel.textContent = '今日免服';
-      dlabel.className = 'dose-label';
-      return; // don't count toward allDone
-    }
-
-    for (let i = 0; i < m.total; i++) {
-      const d = document.createElement('div');
-      d.className = 'dot' + (i < done ? ' filled' : '');
-      d.textContent = i < done ? '✓' : i + 1;
-      d.onclick = () => tapDot(m.id, i);
-      dotsEl.appendChild(d);
-    }
-
-    if (done >= m.total) {
-      dlabel.textContent = '✓ 完成';
-      dlabel.className = 'dose-label complete';
-    } else {
-      dlabel.textContent = `${done} / ${m.total}`;
-      dlabel.className = 'dose-label';
-      allActiveDone = false;
-    }
+    sectHtml += `
+    <div class="med-card${ended?' ended':''}" id="mc-${m.id}">
+      <div class="card-top">
+        <div class="color-bar" style="background:${m.color}"></div>
+        <div class="med-info">
+          <div class="med-name">${m.name}</div>
+          <div class="med-desc">${m.desc||''}</div>
+        </div>
+        ${tagText ? `<div class="course-tag" style="${tagStyle}">${tagText}</div>` : ''}
+      </div>
+      <div class="dose-row">
+        <div class="dose-dots">${dotsHtml}</div>
+        <div class="${labelClass}">${labelText}</div>
+      </div>
+      ${isSkip && !ended ? `<div class="skip-msg show">💤 今天不用服用，明天再吃</div>` : ''}
+    </div>`;
   });
 
-  document.getElementById('doneBanner').classList.toggle('show', allActiveDone);
+  container.innerHTML = sectHtml;
+  document.getElementById('doneBanner').classList.toggle('show', allDone && hasMeds);
+
+  renderBraces();
 }
 
-// ─── Tap dot ────────────────────────────────────────
 function tapDot(medId, dotIdx) {
   const today = todayStr();
   if (!S.history[today]) S.history[today] = {};
   const H = S.history[today];
-  const m = MEDS[medId];
-  const dayIdx = daysBetween(S.startDate, today);
-
-  if (m.limitDays > 0 && dayIdx >= m.limitDays) { showToast('疗程已结束'); return; }
-  if (m.every === 2 && dayIdx % 2 !== 0) { showToast('今天不用服用'); return; }
+  const m = S.meds.find(x => x.id === medId);
+  if (!m) return;
+  if (m.endDate && today > m.endDate) { showToast('疗程已结束'); return; }
 
   const cur = H[medId] || 0;
-
   if (dotIdx < cur) {
-    // tap filled dot → undo to this position
     H[medId] = dotIdx;
     showToast('已撤销');
   } else {
-    // tap unfilled dot → fill up to dotIdx+1
     H[medId] = dotIdx + 1;
-    if (H[medId] === m.total) showToast(`✅ ${m.name} 今日完成！`);
-    else if (m.every === 1) showToast('💧 已记录，记得间隔5分钟');
-    else showToast('💊 已记录');
+    if (H[medId] === m.daily) showToast(`✅ ${m.name} 今日完成！`);
+    else showToast('已记录 · 记得间隔5分钟');
   }
   save();
   renderToday();
 }
 
+// ─── Braces ─────────────────────────────────────────
+function renderBraces() {
+  const b = S.braces;
+  const container = document.getElementById('bracesContainer');
+  if (!b || !b.setStartDate) { container.innerHTML = ''; return; }
+
+  const today = todayStr();
+  const daysSinceStart = daysBetween(b.setStartDate, today); // days since current set started
+  const dayInSet = Math.max(1, Math.min(daysSinceStart + 1, b.daysPerSet));
+  const setsRemaining = b.totalSets - b.currentSet;
+  const totalDaysLeft = setsRemaining * b.daysPerSet + (b.daysPerSet - dayInSet + 1);
+
+  // End date
+  const endMs = new Date(b.setStartDate).getTime() + ((b.totalSets - b.currentSet + 1) * b.daysPerSet - 1) * 86400000;
+  const endDate = new Date(endMs);
+  const endStr = `${endDate.getMonth()+1}月${endDate.getDate()}日`;
+
+  // Overall progress
+  // Assume set 1 started (currentSet-1)*daysPerSet days before setStartDate
+  const set1Start = new Date(new Date(b.setStartDate).getTime() - (b.currentSet-1)*b.daysPerSet*86400000);
+  const totalElapsed = daysBetween(set1Start.toISOString().slice(0,10), today) + 1;
+  const totalAll = b.totalSets * b.daysPerSet;
+  const pct = Math.min(100, Math.round(totalElapsed / totalAll * 100));
+
+  const isChangeDay = dayInSet >= b.daysPerSet;
+  const daysUntilChange = b.daysPerSet - dayInSet;
+
+  const isComplete = b.currentSet > b.totalSets || (b.currentSet === b.totalSets && dayInSet >= b.daysPerSet);
+
+  container.innerHTML = `
+  <div class="sec-label">牙套</div>
+  <div class="braces-card">
+    <div class="braces-top">
+      <div class="color-bar" style="background:#00b4d8;height:48px"></div>
+      <div class="braces-info">
+        <div class="braces-name">牙套进度</div>
+        <div class="braces-desc">每副 ${b.daysPerSet} 天 · 共 ${b.totalSets} 副</div>
+      </div>
+      <div class="course-tag" style="background:#e0f7fb;color:#00b4d8">
+        ${isComplete ? '已完成' : `剩 ${setsRemaining} 副`}
+      </div>
+    </div>
+    <div class="braces-nums">
+      <div class="bnum">
+        <div class="bnum-val" style="color:#00b4d8">${b.currentSet}</div>
+        <div class="bnum-label">当前副数</div>
+      </div>
+      <div class="bnum">
+        <div class="bnum-val">${dayInSet}</div>
+        <div class="bnum-label">本副第几天</div>
+      </div>
+      <div class="bnum">
+        <div class="bnum-val">${isComplete ? 0 : totalDaysLeft}</div>
+        <div class="bnum-label">剩余总天数</div>
+      </div>
+    </div>
+    <div class="braces-bar-wrap">
+      <div class="braces-bar-bg">
+        <div class="braces-bar-fill" style="width:${pct}%;background:#00b4d8"></div>
+      </div>
+      <div class="braces-bar-labels">
+        <span>总进度 ${pct}%</span>
+        <span>预计 ${endStr} 结束</span>
+      </div>
+    </div>
+    <div class="change-note ${isChangeDay && !isComplete ? 'show' : ''}">
+      🔔 今天换第 ${b.currentSet + 1} 副！
+    </div>
+    ${!isChangeDay && !isComplete ? `<div style="font-size:.7rem;color:var(--sub);text-align:center;margin-top:4px">${daysUntilChange} 天后换下一副</div>` : ''}
+  </div>`;
+
+  // Settings meta
+  document.getElementById('bracesSettingsMeta').textContent =
+    `第${b.currentSet}副 · 共${b.totalSets}副`;
+}
+
 // ─── History ────────────────────────────────────────
 function renderHistory() {
   const wrap = document.getElementById('histWrap');
-  if (!S.history || !Object.keys(S.history).length) {
-    wrap.innerHTML = '<div class="empty">📭 还没有记录<br>打卡后会显示在这里</div>';
-    return;
-  }
-  const days = Object.keys(S.history).sort().reverse();
+  const days = Object.keys(S.history).sort().reverse().filter(d => Object.keys(S.history[d]).length > 0);
+  if (!days.length) { wrap.innerHTML = '<div class="empty">📭 还没有记录<br>打卡后会显示在这里</div>'; return; }
+
   const wk = ['日','一','二','三','四','五','六'];
   let html = '';
   days.forEach(day => {
     const H = S.history[day];
-    const di = daysBetween(S.startDate, day);
     const d = new Date(day);
-    const label = `${d.getMonth()+1}月${d.getDate()}日（周${wk[d.getDay()]}）· 第${di+1}天`;
-    html += `<div class="hist-day"><div class="hist-date">${label}</div><div class="hist-card">`;
-    MEDS.forEach(m => {
+    html += `<div class="hist-day"><div class="hist-date">${d.getMonth()+1}月${d.getDate()}日 周${wk[d.getDay()]}</div><div class="hist-card">`;
+    S.meds.forEach(m => {
       const done = H[m.id] || 0;
-      const ended = m.limitDays > 0 && di >= m.limitDays;
-      const skipDay = m.every === 2 && di % 2 !== 0;
+      const ended = m.endDate && day > m.endDate;
+      const epochDay = Math.floor(new Date(day).getTime()/86400000);
+      const isSkip = m.every===2 && epochDay%2!==0;
       let icon, count;
-      if (ended) { icon = '—'; count = '已停药'; }
-      else if (skipDay) { icon = '💤'; count = '今日免服'; }
-      else if (done >= m.total) { icon = '✅'; count = `${done}/${m.total} 次`; }
-      else if (done > 0) { icon = '⭕'; count = `${done}/${m.total} 次`; }
-      else { icon = '❌'; count = '未打卡'; }
-      html += `<div class="hist-row">
-        <div class="hist-dot" style="background:${m.color}"></div>
-        <div class="hist-name">${m.name}</div>
-        <div class="hist-count">${count}</div>
-        <div class="hist-icon">${icon}</div>
-      </div>`;
+      if (ended) { icon='—'; count='已停药'; }
+      else if (isSkip) { icon='💤'; count='免服'; }
+      else if (done >= m.daily) { icon='✅'; count=`${done}/${m.daily}`; }
+      else if (done > 0) { icon='⭕'; count=`${done}/${m.daily}`; }
+      else { icon='❌'; count='未打卡'; }
+      html += `<div class="hist-row"><div class="hist-dot" style="background:${m.color}"></div><div class="hist-name">${m.name}</div><div class="hist-count">${count}</div><div class="hist-icon">${icon}</div></div>`;
     });
     html += `</div></div>`;
   });
   wrap.innerHTML = html;
+}
+
+// ─── Settings render ─────────────────────────────────
+function renderSettings() {
+  const list = document.getElementById('medsSettingsList');
+  list.innerHTML = S.meds.map(m => {
+    const info = m.endDate ? `结束 ${m.endDate}` : '不限疗程';
+    return `<div class="settings-row" onclick="openEditMed('${m.id}')">
+      <span class="s-dot" style="background:${m.color}"></span>
+      <span class="s-name">${m.name}</span>
+      <span class="s-meta">${info}</span>
+      <span class="s-arrow">›</span>
+    </div>`;
+  }).join('');
+  renderBraces(); // updates settings meta too
+}
+
+// ─── Med editing ─────────────────────────────────────
+function buildColorRow(selected) {
+  document.getElementById('colorRow').innerHTML = COLORS.map(c =>
+    `<div class="color-swatch${c===selected?' selected':''}" style="background:${c}" onclick="selectColor('${c}')"></div>`
+  ).join('');
+  editingColor = selected;
+}
+
+function openAddMed() {
+  editingMedId = null;
+  editingDaily = 2; editingEvery = 1; editingColor = '#007aff';
+  document.getElementById('sheetTitle').textContent = '添加新药品';
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-desc').value = '';
+  document.getElementById('f-daily-val').textContent = editingDaily;
+  document.getElementById('f-endDate').value = '';
+  document.getElementById('f-every-toggle').className = 'toggle';
+  document.getElementById('delLink').style.display = 'none';
+  buildColorRow(editingColor);
+  document.getElementById('medOverlay').classList.add('show');
+}
+
+function openEditMed(id) {
+  const m = S.meds.find(x => x.id === id);
+  if (!m) return;
+  editingMedId = id;
+  editingDaily = m.daily; editingEvery = m.every || 1; editingColor = m.color;
+  document.getElementById('sheetTitle').textContent = '编辑药品';
+  document.getElementById('f-name').value = m.name;
+  document.getElementById('f-desc').value = m.desc || '';
+  document.getElementById('f-daily-val').textContent = editingDaily;
+  document.getElementById('f-endDate').value = m.endDate || '';
+  document.getElementById('f-every-toggle').className = 'toggle' + (editingEvery===2?' on':'');
+  document.getElementById('delLink').style.display = 'block';
+  buildColorRow(editingColor);
+  document.getElementById('medOverlay').classList.add('show');
+}
+
+function closeMedSheet(e) {
+  if (e && e.target !== document.getElementById('medOverlay')) return;
+  document.getElementById('medOverlay').classList.remove('show');
+}
+
+function selectColor(c) {
+  editingColor = c;
+  document.querySelectorAll('.color-swatch').forEach(el => {
+    el.classList.toggle('selected', el.style.background === c || getComputedStyle(el).backgroundColor === hexToRgb(c));
+  });
+  document.querySelectorAll('#colorRow .color-swatch').forEach(el => {
+    el.classList.toggle('selected', el.getAttribute('onclick').includes(c));
+  });
+  buildColorRow(c);
+}
+
+function hexToRgb(hex) {
+  const r=parseInt(hex.slice(1,3),16), g=parseInt(hex.slice(3,5),16), b=parseInt(hex.slice(5,7),16);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+function stepDaily(d) {
+  editingDaily = Math.max(1, Math.min(8, editingDaily + d));
+  document.getElementById('f-daily-val').textContent = editingDaily;
+}
+
+function toggleEvery() {
+  editingEvery = editingEvery === 2 ? 1 : 2;
+  document.getElementById('f-every-toggle').className = 'toggle' + (editingEvery===2?' on':'');
+}
+
+function saveMed() {
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) { showToast('请填写药品名称'); return; }
+  const med = {
+    id: editingMedId || 'm' + Date.now(),
+    name,
+    desc: document.getElementById('f-desc').value.trim(),
+    color: editingColor,
+    daily: editingDaily,
+    endDate: document.getElementById('f-endDate').value || '',
+    every: editingEvery,
+  };
+  if (editingMedId) {
+    const idx = S.meds.findIndex(x => x.id === editingMedId);
+    if (idx > -1) S.meds[idx] = med;
+  } else {
+    S.meds.push(med);
+  }
+  save();
+  document.getElementById('medOverlay').classList.remove('show');
+  showToast(editingMedId ? '已保存' : '药品已添加');
+  renderSettings();
+  renderToday();
+}
+
+function deleteMed() {
+  if (!editingMedId) return;
+  if (!confirm('确定删除这个药品吗？打卡记录也会保留但不再显示。')) return;
+  S.meds = S.meds.filter(m => m.id !== editingMedId);
+  save();
+  document.getElementById('medOverlay').classList.remove('show');
+  showToast('已删除');
+  renderSettings();
+  renderToday();
+}
+
+// ─── Braces editing ──────────────────────────────────
+function openEditBraces() {
+  bracesTemp = { ...S.braces };
+  document.getElementById('b-cur-val').textContent = bracesTemp.currentSet;
+  document.getElementById('b-days-val').textContent = bracesTemp.daysPerSet;
+  document.getElementById('b-total-val').textContent = bracesTemp.totalSets;
+  document.getElementById('b-startDate').value = bracesTemp.setStartDate || '';
+  document.getElementById('bracesOverlay').classList.add('show');
+}
+
+function closeBracesSheet(e) {
+  if (e && e.target !== document.getElementById('bracesOverlay')) return;
+  document.getElementById('bracesOverlay').classList.remove('show');
+}
+
+function stepBraces(field, d) {
+  if (field === 'cur') { bracesTemp.currentSet = Math.max(1, (bracesTemp.currentSet||1) + d); document.getElementById('b-cur-val').textContent = bracesTemp.currentSet; }
+  if (field === 'days') { bracesTemp.daysPerSet = Math.max(1, (bracesTemp.daysPerSet||10) + d); document.getElementById('b-days-val').textContent = bracesTemp.daysPerSet; }
+  if (field === 'total') { bracesTemp.totalSets = Math.max(1, (bracesTemp.totalSets||19) + d); document.getElementById('b-total-val').textContent = bracesTemp.totalSets; }
+}
+
+function saveBraces() {
+  bracesTemp.setStartDate = document.getElementById('b-startDate').value;
+  if (!bracesTemp.setStartDate) { showToast('请选择本副开始日期'); return; }
+  S.braces = { ...bracesTemp };
+  save();
+  document.getElementById('bracesOverlay').classList.remove('show');
+  showToast('牙套设置已保存');
+  renderSettings();
+  renderToday();
 }
 
 // ─── Nav ────────────────────────────────────────────
@@ -536,6 +668,7 @@ function showPage(name, btn) {
   document.getElementById('pg-' + name).classList.add('active');
   btn.classList.add('active');
   if (name === 'history') renderHistory();
+  if (name === 'settings') renderSettings();
   if (name === 'today') renderToday();
 }
 
@@ -543,21 +676,16 @@ function showPage(name, btn) {
 let _t;
 function showToast(msg) {
   const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  clearTimeout(_t);
-  _t = setTimeout(() => el.classList.remove('show'), 2200);
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(_t); _t = setTimeout(() => el.classList.remove('show'), 2200);
 }
 
 // ─── Boot ───────────────────────────────────────────
 (function () {
   load();
-  document.getElementById('setupDate').value = todayStr();
-  if (S.startDate) {
-    document.getElementById('setup').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    renderToday();
-  }
+  ensureDefaults();
+  save();
+  renderToday();
 })();
 </script>
 </body>
