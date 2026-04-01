@@ -214,6 +214,11 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', s
       <div class="toggle" id="f-every-toggle" onclick="toggleEvery()"></div>
     </div>
 
+    <div id="startDateField" style="display:none">
+      <div class="field-label">首次服药日期（用于计算哪天该吃）</div>
+      <input class="field-input" id="f-startDate" type="date">
+    </div>
+
     <div class="field-label">疗程结束日期（留空 = 不限）</div>
     <input class="field-input" id="f-endDate" type="date">
 
@@ -258,17 +263,17 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', s
 
 <script>
 // ─── Constants ──────────────────────────────────────
-const KEY = 'tracker_v6';
+const KEY = 'tracker_v7';
 const COLORS = ['#007aff','#34c759','#ff9500','#af52de','#00b4d8','#ff2d55','#ff3b30','#5856d6','#30b0c7','#32ade6'];
 
 const DEFAULT_MEDS = [
-  { id:'m1', name:'埃美丁',  desc:'富马酸依美斯汀 · 每日3次 · 0.05ml', color:'#007aff', daily:3, endDate:'2026-03-18', every:1 },
-  { id:'m2', name:'新泪然',  desc:'羟糖甘滴眼液 · 每日4次 · 0.25ml',   color:'#34c759', daily:4, endDate:'',           every:1 },
-  { id:'m3', name:'普拉洛芬',desc:'普拉洛芬滴眼液 · 每日4次 · 0.05ml', color:'#ff9500', daily:4, endDate:'2026-03-18', every:1 },
-  { id:'m4', name:'环孢素',  desc:'环孢素滴眼液 · 早晚各1次',           color:'#30b0c7', daily:2, endDate:'',           every:1 },
-  { id:'m5', name:'异维A酸', desc:'异维A酸胶囊 · 隔天1颗',             color:'#af52de', daily:1, endDate:'2026-04-29', every:2 },
+  { id:'m1', name:'环孢素',   desc:'环孢素滴眼液 · 早晚各1次',    color:'#30b0c7', daily:2, endDate:'',           every:1, startDate:'' },
+  { id:'m2', name:'人工泪液', desc:'只能用3个月',                  color:'#007aff', daily:4, endDate:'2026-06-26', every:1, startDate:'' },
+  { id:'m3', name:'异维A酸',  desc:'异维A酸胶囊 · 隔天1颗',       color:'#af52de', daily:1, endDate:'2026-04-26', every:2, startDate:'2026-04-01' },
+  { id:'m4', name:'维生素D',  desc:'',                             color:'#ff9500', daily:1, endDate:'',           every:1, startDate:'' },
+  { id:'m5', name:'鱼油',     desc:'',                             color:'#34c759', daily:1, endDate:'',           every:1, startDate:'' },
 ];
-const DEFAULT_BRACES = { currentSet:14, setStartDate:'2026-03-09', daysPerSet:10, totalSets:19 };
+const DEFAULT_BRACES = { currentSet:15, setStartDate:'2026-03-23', daysPerSet:10, totalSets:19 };
 
 // ─── State ──────────────────────────────────────────
 let S = {};
@@ -318,10 +323,10 @@ function renderToday() {
     const done = H[m.id] || 0;
     const isSkipDay = m.every === 2 && (daysBetween(m.endDate || '2026-01-01', today) % 2 !== 0);
 
-    // For skip day calculation: use first recorded history day as reference, or a fixed offset
-    // simpler: use absolute day number from epoch % 2
-    const epochDay = Math.floor(new Date(today).getTime() / 86400000);
-    const isSkip = m.every === 2 && epochDay % 2 !== 0;
+    const isSkip = m.every === 2 && (() => {
+      const ref = m.startDate || today;
+      return daysBetween(ref, today) % 2 !== 0;
+    })();
 
     if (!ended) hasMeds = true;
     if (!ended && !isSkip && done < m.daily) allDone = false;
@@ -540,7 +545,9 @@ function openAddMed() {
   document.getElementById('f-desc').value = '';
   document.getElementById('f-daily-val').textContent = editingDaily;
   document.getElementById('f-endDate').value = '';
+  document.getElementById('f-startDate').value = '';
   document.getElementById('f-every-toggle').className = 'toggle';
+  document.getElementById('startDateField').style.display = 'none';
   document.getElementById('delLink').style.display = 'none';
   buildColorRow(editingColor);
   document.getElementById('medOverlay').classList.add('show');
@@ -556,7 +563,9 @@ function openEditMed(id) {
   document.getElementById('f-desc').value = m.desc || '';
   document.getElementById('f-daily-val').textContent = editingDaily;
   document.getElementById('f-endDate').value = m.endDate || '';
+  document.getElementById('f-startDate').value = m.startDate || '';
   document.getElementById('f-every-toggle').className = 'toggle' + (editingEvery===2?' on':'');
+  document.getElementById('startDateField').style.display = editingEvery === 2 ? '' : 'none';
   document.getElementById('delLink').style.display = 'block';
   buildColorRow(editingColor);
   document.getElementById('medOverlay').classList.add('show');
@@ -591,11 +600,15 @@ function stepDaily(d) {
 function toggleEvery() {
   editingEvery = editingEvery === 2 ? 1 : 2;
   document.getElementById('f-every-toggle').className = 'toggle' + (editingEvery===2?' on':'');
+  document.getElementById('startDateField').style.display = editingEvery === 2 ? '' : 'none';
 }
 
 function saveMed() {
   const name = document.getElementById('f-name').value.trim();
   if (!name) { showToast('请填写药品名称'); return; }
+  if (editingEvery === 2 && !document.getElementById('f-startDate').value) {
+    showToast('请填写首次服药日期'); return;
+  }
   const med = {
     id: editingMedId || 'm' + Date.now(),
     name,
@@ -603,6 +616,7 @@ function saveMed() {
     color: editingColor,
     daily: editingDaily,
     endDate: document.getElementById('f-endDate').value || '',
+    startDate: editingEvery === 2 ? document.getElementById('f-startDate').value : '',
     every: editingEvery,
   };
   if (editingMedId) {
