@@ -27,40 +27,36 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', s
 /* ── Section label ── */
 .sec-label { font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sub); padding: 14px 20px 7px; }
 
-/* ── Med card ── */
-.med-card { margin: 0 16px 10px; background: var(--card); border-radius: 16px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+/* ── Med grid ── */
+.meds-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; padding: 0 16px 4px; }
+.med-card { background: var(--card); border-radius: 14px; padding: 11px 12px 10px; box-shadow: 0 1px 3px rgba(0,0,0,.06); min-width: 0; }
 .med-card.ended { opacity: .42; pointer-events: none; }
-.card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 11px; }
-.color-bar { width: 4px; height: 36px; border-radius: 99px; flex-shrink: 0; }
-.med-info { flex: 1; min-width: 0; }
-.med-name { font-size: .95rem; font-weight: 700; }
-.med-desc { font-size: .7rem; color: var(--sub); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.course-tag { font-size: .63rem; font-weight: 700; padding: 3px 9px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; }
-.dose-row { display: flex; align-items: center; gap: 8px; }
-.dose-dots { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
-.dot { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--sep); background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: .73rem; color: var(--sub); cursor: pointer; transition: all .15s; flex-shrink: 0; user-select: none; -webkit-user-select: none; }
+.card-top { margin-bottom: 8px; }
+.card-head { display: flex; align-items: flex-start; gap: 7px; }
+.color-bar { width: 3px; min-height: 16px; border-radius: 99px; flex-shrink: 0; margin-top: 2px; }
+.med-name { font-size: .86rem; font-weight: 700; flex: 1; min-width: 0; line-height: 1.3; }
+.course-tag { font-size: .58rem; font-weight: 700; padding: 2px 6px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+.med-desc { font-size: .63rem; color: var(--sub); margin: 2px 0 0 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dose-row { display: flex; align-items: center; justify-content: space-between; gap: 5px; margin-top: 8px; }
+.dose-dots { display: flex; gap: 5px; flex-wrap: wrap; }
+.dot { width: 27px; height: 27px; border-radius: 50%; border: 2px solid var(--sep); background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: .66rem; color: var(--sub); cursor: pointer; transition: all .15s; flex-shrink: 0; user-select: none; -webkit-user-select: none; }
 .dot:active { transform: scale(.88); }
-.dot.filled { border-color: var(--c); background: var(--c); color: #fff; font-size: .85rem; }
-.dose-label { font-size: .72rem; color: var(--sub); white-space: nowrap; font-weight: 500; }
+.dot.filled { border-color: var(--c); background: var(--c); color: #fff; font-size: .76rem; }
+.dose-label { font-size: .66rem; color: var(--sub); white-space: nowrap; font-weight: 500; }
 .dose-label.complete { color: var(--green); font-weight: 700; }
-.skip-msg { font-size: .72rem; color: var(--sub); padding: 5px 0 0; display: none; }
+.skip-msg { font-size: .63rem; color: var(--sub); padding: 4px 0 0; display: none; }
 .skip-msg.show { display: block; }
 
-/* ── Braces card ── */
-.braces-card { margin: 0 16px 10px; background: var(--card); border-radius: 16px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
-.braces-top { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-.braces-info { flex: 1; }
-.braces-name { font-size: .95rem; font-weight: 700; }
-.braces-desc { font-size: .7rem; color: var(--sub); margin-top: 2px; }
-.braces-nums { display: flex; gap: 10px; margin-bottom: 10px; }
-.bnum { flex: 1; background: var(--bg); border-radius: 10px; padding: 9px 10px; text-align: center; }
-.bnum-val { font-size: 1.3rem; font-weight: 700; line-height: 1; }
-.bnum-label { font-size: .62rem; color: var(--sub); margin-top: 3px; }
-.braces-bar-wrap { margin-bottom: 6px; }
-.braces-bar-bg { height: 6px; background: var(--sep); border-radius: 99px; overflow: hidden; }
+/* ── Braces card (compact) ── */
+.braces-card { margin: 0 16px 10px; background: var(--card); border-radius: 14px; padding: 13px 14px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.braces-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.braces-name { font-size: .9rem; font-weight: 700; flex: 1; }
+.braces-tag { font-size: .63rem; font-weight: 700; padding: 3px 9px; border-radius: 99px; }
+.braces-meta { font-size: .72rem; color: var(--sub); margin-bottom: 8px; }
+.braces-bar-bg { height: 5px; background: var(--sep); border-radius: 99px; overflow: hidden; margin-bottom: 5px; }
 .braces-bar-fill { height: 100%; border-radius: 99px; transition: width .5s; }
-.braces-bar-labels { display: flex; justify-content: space-between; font-size: .65rem; color: var(--sub); margin-top: 4px; }
-.change-note { font-size: .72rem; color: #ff3b30; font-weight: 600; text-align: center; margin-top: 6px; display: none; }
+.braces-sub { display: flex; justify-content: space-between; font-size: .65rem; color: var(--sub); }
+.change-note { font-size: .75rem; color: #ff3b30; font-weight: 600; margin-top: 8px; display: none; }
 .change-note.show { display: block; }
 
 /* ── History ── */
@@ -263,17 +259,20 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', s
 
 <script>
 // ─── Constants ──────────────────────────────────────
-const KEY = 'tracker_v7';
+const KEY = 'tracker_v8';
 const COLORS = ['#007aff','#34c759','#ff9500','#af52de','#00b4d8','#ff2d55','#ff3b30','#5856d6','#30b0c7','#32ade6'];
 
 const DEFAULT_MEDS = [
-  { id:'m1', name:'环孢素',   desc:'环孢素滴眼液 · 早晚各1次',    color:'#30b0c7', daily:2, endDate:'',           every:1, startDate:'' },
-  { id:'m2', name:'人工泪液', desc:'只能用3个月',                  color:'#007aff', daily:4, endDate:'2026-06-26', every:1, startDate:'' },
-  { id:'m3', name:'异维A酸',  desc:'异维A酸胶囊 · 隔天1颗',       color:'#af52de', daily:1, endDate:'2026-04-26', every:2, startDate:'2026-04-01' },
-  { id:'m4', name:'维生素D',  desc:'',                             color:'#ff9500', daily:1, endDate:'',           every:1, startDate:'' },
-  { id:'m5', name:'鱼油',     desc:'',                             color:'#34c759', daily:1, endDate:'',           every:1, startDate:'' },
+  { id:'m1', name:'环孢素',   desc:'环孢素滴眼液 · 早晚各1次', color:'#30b0c7', daily:2, endDate:'',           every:1, startDate:'' },
+  { id:'m2', name:'人工泪液', desc:'只能用3个月',               color:'#007aff', daily:4, endDate:'2026-06-27', every:1, startDate:'' },
+  { id:'m3', name:'异维A酸',  desc:'异维A酸胶囊 · 隔天1颗',    color:'#af52de', daily:1, endDate:'2026-04-26', every:2, startDate:'2026-04-01' },
+  { id:'m4', name:'维生素D',  desc:'',                          color:'#ff9500', daily:1, endDate:'',           every:1, startDate:'' },
+  { id:'m5', name:'鱼油',     desc:'',                          color:'#34c759', daily:1, endDate:'',           every:1, startDate:'' },
+  { id:'m6', name:'叶黄素',   desc:'',                          color:'#ffcc00', daily:1, endDate:'',           every:1, startDate:'' },
+  { id:'m7', name:'埃美丁',   desc:'',                          color:'#007aff', daily:2, endDate:'2026-05-10', every:1, startDate:'' },
+  { id:'m8', name:'镁',       desc:'',                          color:'#5856d6', daily:2, endDate:'',           every:1, startDate:'' },
 ];
-const DEFAULT_BRACES = { currentSet:15, setStartDate:'2026-03-23', daysPerSet:10, totalSets:19 };
+const DEFAULT_BRACES = { currentSet:16, setStartDate:'2026-04-05', daysPerSet:10, totalSets:19 };
 
 // ─── State ──────────────────────────────────────────
 let S = {};
@@ -314,15 +313,13 @@ function renderToday() {
 
   // Meds
   const container = document.getElementById('medsContainer');
-  let sectHtml = `<div class="sec-label">用药</div>`;
+  let sectHtml = `<div class="sec-label">用药</div><div class="meds-grid">`;
   let allDone = true;
   let hasMeds = false;
 
   S.meds.forEach(m => {
     const ended = m.endDate && today > m.endDate;
     const done = H[m.id] || 0;
-    const isSkipDay = m.every === 2 && (daysBetween(m.endDate || '2026-01-01', today) % 2 !== 0);
-
     const isSkip = m.every === 2 && (() => {
       const ref = m.startDate || today;
       return daysBetween(ref, today) % 2 !== 0;
@@ -335,20 +332,15 @@ function renderToday() {
     let tagText = '', tagStyle = '';
     if (m.endDate) {
       if (ended) {
-        tagText = '已停药';
-        tagStyle = `background:#f2f2f7;color:#8e8e93`;
+        tagText = '停药'; tagStyle = `background:#f2f2f7;color:#8e8e93`;
       } else {
         const rem = daysBetween(today, m.endDate) + 1;
-        tagText = `剩 ${rem} 天`;
-        tagStyle = rem <= 3
-          ? `background:#ffeeee;color:#ff3b30`
-          : `background:${m.color}18;color:${m.color}`;
+        tagText = `剩${rem}天`;
+        tagStyle = rem <= 3 ? `background:#ffeeee;color:#ff3b30` : `background:${m.color}18;color:${m.color}`;
       }
-    } else {
-      tagText = ''; tagStyle = '';
     }
 
-    // Dots HTML
+    // Dots
     let dotsHtml = '';
     if (!ended && !isSkip) {
       for (let i = 0; i < m.daily; i++) {
@@ -358,29 +350,30 @@ function renderToday() {
     }
 
     let labelText = '', labelClass = 'dose-label';
-    if (ended) { labelText = '已停药'; }
+    if (ended) { labelText = '停药'; }
     else if (isSkip) { labelText = '今日免服'; }
-    else if (done >= m.daily) { labelText = '✓ 完成'; labelClass = 'dose-label complete'; }
-    else { labelText = `${done} / ${m.daily}`; }
+    else if (done >= m.daily) { labelText = '✓'; labelClass = 'dose-label complete'; }
+    else { labelText = `${done}/${m.daily}`; }
 
     sectHtml += `
     <div class="med-card${ended?' ended':''}" id="mc-${m.id}">
       <div class="card-top">
-        <div class="color-bar" style="background:${m.color}"></div>
-        <div class="med-info">
+        <div class="card-head">
+          <div class="color-bar" style="background:${m.color}"></div>
           <div class="med-name">${m.name}</div>
-          <div class="med-desc">${m.desc||''}</div>
+          ${tagText ? `<div class="course-tag" style="${tagStyle}">${tagText}</div>` : ''}
         </div>
-        ${tagText ? `<div class="course-tag" style="${tagStyle}">${tagText}</div>` : ''}
+        ${m.desc ? `<div class="med-desc">${m.desc}</div>` : ''}
       </div>
       <div class="dose-row">
         <div class="dose-dots">${dotsHtml}</div>
         <div class="${labelClass}">${labelText}</div>
       </div>
-      ${isSkip && !ended ? `<div class="skip-msg show">💤 今天不用服用，明天再吃</div>` : ''}
+      ${isSkip && !ended ? `<div class="skip-msg show">💤 明日再服</div>` : ''}
     </div>`;
   });
 
+  sectHtml += '</div>';
   container.innerHTML = sectHtml;
   document.getElementById('doneBanner').classList.toggle('show', allDone && hasMeds);
 
@@ -440,43 +433,19 @@ function renderBraces() {
   container.innerHTML = `
   <div class="sec-label">牙套</div>
   <div class="braces-card">
-    <div class="braces-top">
-      <div class="color-bar" style="background:#00b4d8;height:48px"></div>
-      <div class="braces-info">
-        <div class="braces-name">牙套进度</div>
-        <div class="braces-desc">每副 ${b.daysPerSet} 天 · 共 ${b.totalSets} 副</div>
-      </div>
-      <div class="course-tag" style="background:#e0f7fb;color:#00b4d8">
-        ${isComplete ? '已完成' : `剩 ${setsRemaining} 副`}
-      </div>
+    <div class="braces-row">
+      <div class="color-bar" style="background:#00b4d8"></div>
+      <div class="braces-name">牙套进度</div>
+      <div class="braces-tag" style="background:#e0f7fb;color:#00b4d8">${isComplete ? '已完成' : `第${b.currentSet}副 · 第${dayInSet}天`}</div>
     </div>
-    <div class="braces-nums">
-      <div class="bnum">
-        <div class="bnum-val" style="color:#00b4d8">${b.currentSet}</div>
-        <div class="bnum-label">当前副数</div>
-      </div>
-      <div class="bnum">
-        <div class="bnum-val">${dayInSet}</div>
-        <div class="bnum-label">本副第几天</div>
-      </div>
-      <div class="bnum">
-        <div class="bnum-val">${isComplete ? 0 : totalDaysLeft}</div>
-        <div class="bnum-label">剩余总天数</div>
-      </div>
+    <div class="braces-bar-bg">
+      <div class="braces-bar-fill" style="width:${pct}%;background:#00b4d8"></div>
     </div>
-    <div class="braces-bar-wrap">
-      <div class="braces-bar-bg">
-        <div class="braces-bar-fill" style="width:${pct}%;background:#00b4d8"></div>
-      </div>
-      <div class="braces-bar-labels">
-        <span>总进度 ${pct}%</span>
-        <span>预计 ${endStr} 结束</span>
-      </div>
+    <div class="braces-sub">
+      <span>${pct}%</span>
+      <span>${isComplete ? '已完成' : (isChangeDay ? '今天换副' : `${daysUntilChange}天后换副 · 预计${endStr}结束`)}</span>
     </div>
-    <div class="change-note ${isChangeDay && !isComplete ? 'show' : ''}">
-      🔔 今天换第 ${b.currentSet + 1} 副！
-    </div>
-    ${!isChangeDay && !isComplete ? `<div style="font-size:.7rem;color:var(--sub);text-align:center;margin-top:4px">${daysUntilChange} 天后换下一副</div>` : ''}
+    <div class="change-note ${isChangeDay && !isComplete ? 'show' : ''}">🔔 今天换第 ${b.currentSet + 1} 副！</div>
   </div>`;
 
   // Settings meta
