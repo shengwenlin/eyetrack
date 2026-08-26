@@ -93,9 +93,11 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
 /* ── Edit sheet (overlay) ── */
 .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 200; display: none; align-items: flex-end; }
 .overlay.show { display: flex; }
-.sheet { background: var(--card); width: 100%; max-width: 430px; margin: 0 auto; border-radius: 26px 26px 0 0; padding: 22px 20px env(safe-area-inset-bottom, 26px); max-height: 90vh; overflow-y: auto; }
+.sheet { background: var(--card); width: 100%; max-width: 430px; margin: 0 auto; border-radius: 26px 26px 0 0; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; }
+.sheet-body { padding: 16px 20px 4px; overflow-y: auto; flex: 1; min-height: 0; }
+.sheet-footer { padding: 12px 20px env(safe-area-inset-bottom, 20px); border-top: 1px solid var(--sep); flex-shrink: 0; }
 .sheet-handle { width: 36px; height: 4px; background: var(--sep); border-radius: 99px; margin: 0 auto 20px; }
-.sheet-title { font-size: 1.08rem; font-weight: 700; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; }
+.sheet-title { font-size: 1.08rem; font-weight: 700; padding: 20px 20px 14px; margin: 0; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; border-bottom: 1px solid var(--sep); }
 .sheet-close { background: var(--bg); border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; font-size: .9rem; color: var(--sub); display: flex; align-items: center; justify-content: center; }
 .field-label { font-size: .72rem; font-weight: 600; color: var(--sub); margin-bottom: 6px; letter-spacing: .05em; text-transform: uppercase; }
 .field-input { width: 100%; border: 1.5px solid var(--sep); border-radius: 12px; padding: 11px 13px; font-size: .9rem; font-family: inherit; color: var(--text); background: var(--bg); outline: none; margin-bottom: 14px; }
@@ -196,48 +198,50 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
       <span id="sheetTitle">编辑药品</span>
       <button class="sheet-close" onclick="closeMedSheet()">✕</button>
     </div>
+    <div class="sheet-body">
+      <div class="field-label">药品名称</div>
+      <input class="field-input" id="f-name" placeholder="例：埃美丁" maxlength="20">
 
-    <div class="field-label">药品名称</div>
-    <input class="field-input" id="f-name" placeholder="例：埃美丁" maxlength="20">
+      <div class="field-label">说明（可选）</div>
+      <input class="field-input" id="f-desc" placeholder="例：富马酸依美斯汀 · 每日3次" maxlength="40">
 
-    <div class="field-label">说明（可选）</div>
-    <input class="field-input" id="f-desc" placeholder="例：富马酸依美斯汀 · 每日3次" maxlength="40">
+      <div class="field-label">颜色</div>
+      <div class="color-row" id="colorRow"></div>
 
-    <div class="field-label">颜色</div>
-    <div class="color-row" id="colorRow"></div>
-
-    <div class="field-label">每日次数</div>
-    <div class="stepper">
-      <button class="stepper-btn" onclick="stepDaily(-1)">−</button>
-      <span class="stepper-val" id="f-daily-val">2</span>
-      <button class="stepper-btn" onclick="stepDaily(1)">＋</button>
-    </div>
-
-    <div class="field-label">每次用量（可选，如 2 粒 / 1 滴）</div>
-    <div class="amount-row">
+      <div class="field-label">每日次数</div>
       <div class="stepper">
-        <button class="stepper-btn" onclick="stepAmount(-1)">−</button>
-        <span class="stepper-val" id="f-amount-val">1</span>
-        <button class="stepper-btn" onclick="stepAmount(1)">＋</button>
+        <button class="stepper-btn" onclick="stepDaily(-1)">−</button>
+        <span class="stepper-val" id="f-daily-val">2</span>
+        <button class="stepper-btn" onclick="stepDaily(1)">＋</button>
       </div>
-      <input class="field-input" id="f-unit" placeholder="单位" maxlength="4">
+
+      <div class="field-label">每次用量（可选，如 2 粒 / 1 滴）</div>
+      <div class="amount-row">
+        <div class="stepper">
+          <button class="stepper-btn" onclick="stepAmount(-1)">−</button>
+          <span class="stepper-val" id="f-amount-val">1</span>
+          <button class="stepper-btn" onclick="stepAmount(1)">＋</button>
+        </div>
+        <input class="field-input" id="f-unit" placeholder="单位" maxlength="4">
+      </div>
+
+      <div class="toggle-row">
+        <span class="toggle-label">隔天服用（每2天一次）</span>
+        <div class="toggle" id="f-every-toggle" onclick="toggleEvery()"></div>
+      </div>
+
+      <div id="startDateField">
+        <div class="field-label">开始日期（用于计算用药进度）</div>
+        <input class="field-input" id="f-startDate" type="date">
+      </div>
+
+      <div class="field-label">疗程结束日期（留空 = 不限）</div>
+      <input class="field-input" id="f-endDate" type="date">
     </div>
-
-    <div class="toggle-row">
-      <span class="toggle-label">隔天服用（每2天一次）</span>
-      <div class="toggle" id="f-every-toggle" onclick="toggleEvery()"></div>
+    <div class="sheet-footer">
+      <button class="save-btn" onclick="saveMed()">保存</button>
+      <span class="del-link" id="delLink" onclick="deleteMed()">删除此药品</span>
     </div>
-
-    <div id="startDateField">
-      <div class="field-label">开始日期（用于计算用药进度）</div>
-      <input class="field-input" id="f-startDate" type="date">
-    </div>
-
-    <div class="field-label">疗程结束日期（留空 = 不限）</div>
-    <input class="field-input" id="f-endDate" type="date">
-
-    <button class="save-btn" onclick="saveMed()">保存</button>
-    <span class="del-link" id="delLink" onclick="deleteMed()">删除此药品</span>
   </div>
 </div>
 
@@ -248,27 +252,31 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
       牙套设置
       <button class="sheet-close" onclick="closeBracesSheet()">✕</button>
     </div>
-    <div class="field-label">当前副数（现在戴第几副）</div>
-    <div class="stepper">
-      <button class="stepper-btn" onclick="stepBraces('cur',-1)">−</button>
-      <span class="stepper-val" id="b-cur-val">14</span>
-      <button class="stepper-btn" onclick="stepBraces('cur',1)">＋</button>
+    <div class="sheet-body">
+      <div class="field-label">当前副数（现在戴第几副）</div>
+      <div class="stepper">
+        <button class="stepper-btn" onclick="stepBraces('cur',-1)">−</button>
+        <span class="stepper-val" id="b-cur-val">14</span>
+        <button class="stepper-btn" onclick="stepBraces('cur',1)">＋</button>
+      </div>
+      <div class="field-label">本副开始日期</div>
+      <input class="field-input" id="b-startDate" type="date">
+      <div class="field-label">每副佩戴天数</div>
+      <div class="stepper">
+        <button class="stepper-btn" onclick="stepBraces('days',-1)">−</button>
+        <span class="stepper-val" id="b-days-val">10</span>
+        <button class="stepper-btn" onclick="stepBraces('days',1)">＋</button>
+      </div>
+      <div class="field-label">总副数</div>
+      <div class="stepper">
+        <button class="stepper-btn" onclick="stepBraces('total',-1)">−</button>
+        <span class="stepper-val" id="b-total-val">19</span>
+        <button class="stepper-btn" onclick="stepBraces('total',1)">＋</button>
+      </div>
     </div>
-    <div class="field-label">本副开始日期</div>
-    <input class="field-input" id="b-startDate" type="date">
-    <div class="field-label">每副佩戴天数</div>
-    <div class="stepper">
-      <button class="stepper-btn" onclick="stepBraces('days',-1)">−</button>
-      <span class="stepper-val" id="b-days-val">10</span>
-      <button class="stepper-btn" onclick="stepBraces('days',1)">＋</button>
+    <div class="sheet-footer">
+      <button class="save-btn" onclick="saveBraces()">保存</button>
     </div>
-    <div class="field-label">总副数</div>
-    <div class="stepper">
-      <button class="stepper-btn" onclick="stepBraces('total',-1)">−</button>
-      <span class="stepper-val" id="b-total-val">19</span>
-      <button class="stepper-btn" onclick="stepBraces('total',1)">＋</button>
-    </div>
-    <button class="save-btn" onclick="saveBraces()">保存</button>
   </div>
 </div>
 
