@@ -104,6 +104,9 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
 .stepper-btn { width: 44px; height: 42px; border: none; background: none; font-size: 1.3rem; color: var(--accent); cursor: pointer; font-family: inherit; flex-shrink: 0; }
 .stepper-btn:active { background: var(--sep); }
 .stepper-val { flex: 1; text-align: center; font-size: .95rem; font-weight: 600; }
+.amount-row { display: flex; gap: 8px; align-items: stretch; }
+.amount-row .stepper { flex: 1; margin-bottom: 14px; }
+.amount-row .field-input { width: 88px; margin-bottom: 14px; flex-shrink: 0; }
 .color-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
 .color-swatch { width: 32px; height: 32px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: all .15s; flex-shrink: 0; }
 .color-swatch.selected { border-color: var(--text); transform: scale(1.15); }
@@ -210,6 +213,16 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
       <button class="stepper-btn" onclick="stepDaily(1)">＋</button>
     </div>
 
+    <div class="field-label">每次用量（可选，如 2 粒 / 1 滴）</div>
+    <div class="amount-row">
+      <div class="stepper">
+        <button class="stepper-btn" onclick="stepAmount(-1)">−</button>
+        <span class="stepper-val" id="f-amount-val">1</span>
+        <button class="stepper-btn" onclick="stepAmount(1)">＋</button>
+      </div>
+      <input class="field-input" id="f-unit" placeholder="单位" maxlength="4">
+    </div>
+
     <div class="toggle-row">
       <span class="toggle-label">隔天服用（每2天一次）</span>
       <div class="toggle" id="f-every-toggle" onclick="toggleEvery()"></div>
@@ -267,12 +280,12 @@ const KEY = 'tracker_v8';
 const COLORS = ['#007aff','#34c759','#ff9500','#af52de','#00b4d8','#ff2d55','#ff3b30','#5856d6','#30b0c7','#32ade6'];
 
 const DEFAULT_MEDS = [
-  { id:'m1', name:'异维A酸',  desc:'服满370颗',   color:'#af52de', daily:1, endDate:'2028-03-08', every:1, startDate:'' },
-  { id:'m2', name:'维生素D',  desc:'',            color:'#ff9500', daily:1, endDate:'',           every:1, startDate:'' },
-  { id:'m3', name:'叶黄素',   desc:'',            color:'#ffcc00', daily:1, endDate:'',           every:1, startDate:'' },
-  { id:'m4', name:'奥洛他定', desc:'',            color:'#007aff', daily:3, endDate:'2026-08-27', every:1, startDate:'' },
-  { id:'m5', name:'人工泪液', desc:'',            color:'#007aff', daily:4, endDate:'2026-08-27', every:1, startDate:'' },
-  { id:'m6', name:'氟米龙',   desc:'',            color:'#007aff', daily:3, endDate:'2026-08-28', every:1, startDate:'' },
+  { id:'m1', name:'异维A酸',  desc:'服满370颗',   color:'#af52de', daily:1, perDose:1, unit:'粒', endDate:'2028-03-08', every:1, startDate:'' },
+  { id:'m2', name:'维生素D',  desc:'',            color:'#ff9500', daily:1, perDose:1, unit:'粒', endDate:'',           every:1, startDate:'' },
+  { id:'m3', name:'叶黄素',   desc:'',            color:'#ffcc00', daily:1, perDose:1, unit:'粒', endDate:'',           every:1, startDate:'' },
+  { id:'m4', name:'奥洛他定', desc:'',            color:'#007aff', daily:3, perDose:1, unit:'滴', endDate:'2026-08-27', every:1, startDate:'' },
+  { id:'m5', name:'人工泪液', desc:'',            color:'#007aff', daily:4, perDose:1, unit:'滴', endDate:'2026-08-27', every:1, startDate:'' },
+  { id:'m6', name:'氟米龙',   desc:'',            color:'#007aff', daily:3, perDose:1, unit:'滴', endDate:'2026-08-28', every:1, startDate:'' },
 ];
 const DEFAULT_BRACES = { currentSet:8, setStartDate:'2026-08-17', daysPerSet:10, totalSets:19 };
 
@@ -282,6 +295,7 @@ let editingMedId = null; // null = add new
 let editingDaily = 2;
 let editingEvery = 1;
 let editingColor = '#007aff';
+let editingAmount = 1;
 let bracesTemp = {};
 
 // ─── Utils ──────────────────────────────────────────
@@ -353,6 +367,11 @@ function renderToday() {
     else if (done >= m.daily) { labelText = '✓'; labelClass = 'dose-label complete'; }
     else { labelText = `${done}/${m.daily}`; }
 
+    const descParts = [];
+    if (m.desc) descParts.push(m.desc);
+    if (m.unit) descParts.push(`每次${m.perDose || 1}${m.unit}`);
+    const descLine = descParts.join(' · ');
+
     sectHtml += `
     <div class="med-card${ended?' ended':''}" id="mc-${m.id}">
       <div class="card-top">
@@ -361,7 +380,7 @@ function renderToday() {
           <div class="med-name">${m.name}</div>
           ${tagText ? `<div class="course-tag" style="${tagStyle}">${tagText}</div>` : ''}
         </div>
-        ${m.desc ? `<div class="med-desc">${m.desc}</div>` : ''}
+        ${descLine ? `<div class="med-desc">${descLine}</div>` : ''}
       </div>
       <div class="dose-row">
         <div class="dose-dots">${dotsHtml}</div>
@@ -465,10 +484,12 @@ function renderUsage() {
   if (!S.meds.length) { wrap.innerHTML = '<div class="empty">📭 暂无药品</div>'; return; }
   wrap.innerHTML = `<div class="usage-card">${S.meds.map(m => {
     const { used, remaining } = medUsageStats(m);
+    const unit = m.unit || '次';
+    const mult = m.unit ? (m.perDose || 1) : 1;
     return `<div class="usage-row">
       <div class="usage-dot" style="background:${m.color}"></div>
       <div class="usage-name">${m.name}</div>
-      <div class="usage-stat">已用 <b>${used}</b> · 未用 <b>${remaining}</b></div>
+      <div class="usage-stat">已用 <b>${used * mult}</b>${unit} · 未用 <b>${remaining * mult}</b>${unit}</div>
     </div>`;
   }).join('')}</div>`;
 }
@@ -529,11 +550,13 @@ function buildColorRow(selected) {
 
 function openAddMed() {
   editingMedId = null;
-  editingDaily = 2; editingEvery = 1; editingColor = '#007aff';
+  editingDaily = 2; editingEvery = 1; editingColor = '#007aff'; editingAmount = 1;
   document.getElementById('sheetTitle').textContent = '添加新药品';
   document.getElementById('f-name').value = '';
   document.getElementById('f-desc').value = '';
   document.getElementById('f-daily-val').textContent = editingDaily;
+  document.getElementById('f-amount-val').textContent = editingAmount;
+  document.getElementById('f-unit').value = '';
   document.getElementById('f-endDate').value = '';
   document.getElementById('f-startDate').value = todayStr();
   document.getElementById('f-every-toggle').className = 'toggle';
@@ -546,11 +569,13 @@ function openEditMed(id) {
   const m = S.meds.find(x => x.id === id);
   if (!m) return;
   editingMedId = id;
-  editingDaily = m.daily; editingEvery = m.every || 1; editingColor = m.color;
+  editingDaily = m.daily; editingEvery = m.every || 1; editingColor = m.color; editingAmount = m.perDose || 1;
   document.getElementById('sheetTitle').textContent = '编辑药品';
   document.getElementById('f-name').value = m.name;
   document.getElementById('f-desc').value = m.desc || '';
   document.getElementById('f-daily-val').textContent = editingDaily;
+  document.getElementById('f-amount-val').textContent = editingAmount;
+  document.getElementById('f-unit').value = m.unit || '';
   document.getElementById('f-endDate').value = m.endDate || '';
   document.getElementById('f-startDate').value = m.startDate || '';
   document.getElementById('f-every-toggle').className = 'toggle' + (editingEvery===2?' on':'');
@@ -585,6 +610,11 @@ function stepDaily(d) {
   document.getElementById('f-daily-val').textContent = editingDaily;
 }
 
+function stepAmount(d) {
+  editingAmount = Math.max(1, Math.min(20, editingAmount + d));
+  document.getElementById('f-amount-val').textContent = editingAmount;
+}
+
 function toggleEvery() {
   editingEvery = editingEvery === 2 ? 1 : 2;
   document.getElementById('f-every-toggle').className = 'toggle' + (editingEvery===2?' on':'');
@@ -602,6 +632,8 @@ function saveMed() {
     desc: document.getElementById('f-desc').value.trim(),
     color: editingColor,
     daily: editingDaily,
+    perDose: editingAmount,
+    unit: document.getElementById('f-unit').value.trim(),
     endDate: document.getElementById('f-endDate').value || '',
     startDate: document.getElementById('f-startDate').value || '',
     every: editingEvery,
