@@ -16,8 +16,12 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
 /* ── Header ── */
 .header { padding: 22px 22px 8px; }
 .header-row { display: flex; justify-content: space-between; align-items: flex-end; }
+.header-row.with-back { justify-content: flex-start; align-items: center; gap: 10px; }
 .header h1 { font-size: 1.35rem; font-weight: 700; letter-spacing: -.02em; }
 .date-sub { font-size: .72rem; color: var(--sub); margin-top: 3px; font-weight: 500; }
+.header-actions { display: flex; gap: 8px; }
+.icon-btn { width: 34px; height: 34px; border-radius: 50%; border: none; background: var(--card); box-shadow: 0 1px 2px rgba(0,0,0,.08); font-size: 1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text); flex-shrink: 0; }
+.icon-btn.back { font-size: 1.4rem; font-weight: 700; }
 
 /* ── Banners ── */
 .done-banner { margin: 0 18px 10px; background: var(--green); border-radius: 16px; padding: 11px 16px; color: #fff; font-size: .84rem; font-weight: 600; text-align: center; display: none; }
@@ -54,6 +58,20 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
 .braces-status { font-size: .78rem; color: var(--sub); font-weight: 500; }
 .braces-status.urgent { color: var(--red); font-weight: 700; }
 
+/* ── Bowel ── */
+.bowel-quick-wrap { padding: 4px 18px 8px; }
+.bowel-list { margin: 0 18px 10px; background: var(--card); border-radius: 18px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.03), 0 4px 14px rgba(0,0,0,.03); }
+.bowel-row { display: flex; gap: 11px; padding: 12px 14px; border-bottom: 1px solid var(--sep); cursor: pointer; align-items: flex-start; }
+.bowel-row:last-child { border-bottom: none; }
+.bristol-badge { width: 30px; height: 30px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.bristol-badge svg { width: 17px; height: 11px; display: block; }
+.bowel-row-main { flex: 1; min-width: 0; }
+.bowel-row-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.bowel-type-name { font-size: .83rem; font-weight: 700; }
+.bowel-time { font-size: .7rem; color: var(--sub); font-weight: 500; white-space: nowrap; flex-shrink: 0; }
+.bowel-tags { font-size: .67rem; color: var(--sub); margin-top: 3px; }
+.bowel-note-text { font-size: .72rem; color: var(--text); margin-top: 3px; line-height: 1.4; }
+
 /* ── History ── */
 .usage-wrap { padding: 4px 18px 6px; }
 .usage-card { background: var(--card); border-radius: 18px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.03), 0 4px 14px rgba(0,0,0,.03); margin-bottom: 4px; }
@@ -63,6 +81,15 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
 .usage-name { font-size: .84rem; font-weight: 600; flex: 1; min-width: 0; }
 .usage-stat { font-size: .72rem; color: var(--sub); text-align: right; white-space: nowrap; }
 .usage-stat b { color: var(--text); font-weight: 700; }
+
+/* ── Trend chart ── */
+.trend-legend { display: flex; flex-wrap: wrap; gap: 9px 12px; padding: 0 18px 8px; font-size: .66rem; color: var(--sub); align-items: center; }
+.trend-legend span { display: flex; align-items: center; gap: 4px; }
+.trend-legend i { width: 8px; height: 8px; border-radius: 2px; display: inline-block; flex-shrink: 0; }
+.trend-legend i.dot { border-radius: 50%; }
+.trend-legend-sep { width: 1px; height: 10px; background: var(--sep); }
+.trend-card { margin: 0 18px 4px; background: var(--card); border-radius: 18px; padding: 12px 10px 8px; box-shadow: 0 1px 2px rgba(0,0,0,.03), 0 4px 14px rgba(0,0,0,.03); }
+.trend-svg { width: 100%; height: auto; display: block; }
 
 .hist-wrap { padding: 6px 0 10px; }
 .hist-day { margin: 0 18px 12px; }
@@ -96,7 +123,6 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
 .sheet { background: var(--card); width: 100%; max-width: 430px; margin: 0 auto; border-radius: 26px 26px 0 0; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; }
 .sheet-body { padding: 16px 20px 4px; overflow-y: auto; flex: 1; min-height: 0; }
 .sheet-footer { padding: 12px 20px env(safe-area-inset-bottom, 20px); border-top: 1px solid var(--sep); flex-shrink: 0; }
-.sheet-handle { width: 36px; height: 4px; background: var(--sep); border-radius: 99px; margin: 0 auto 20px; }
 .sheet-title { font-size: 1.08rem; font-weight: 700; padding: 20px 20px 14px; margin: 0; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; border-bottom: 1px solid var(--sep); }
 .sheet-close { background: var(--bg); border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; font-size: .9rem; color: var(--sub); display: flex; align-items: center; justify-content: center; }
 .field-label { font-size: .72rem; font-weight: 600; color: var(--sub); margin-bottom: 6px; letter-spacing: .05em; text-transform: uppercase; }
@@ -112,6 +138,17 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
 .color-row { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
 .color-swatch { width: 32px; height: 32px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: all .15s; flex-shrink: 0; }
 .color-swatch.selected { border-color: var(--text); transform: scale(1.15); }
+.bristol-row { display: flex; gap: 6px; margin-bottom: 8px; }
+.bristol-pill { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 10px 2px 8px; border-radius: 14px; background: var(--bg); border: 1.5px solid var(--sep); color: var(--sub); cursor: pointer; transition: all .15s; }
+.bristol-pill.selected { background: var(--bc); border-color: var(--bc); color: #fff; }
+.bristol-icon svg { width: 28px; height: 16px; display: block; }
+.bristol-pill-label { font-size: .6rem; font-weight: 600; line-height: 1.15; text-align: center; }
+.bristol-desc { font-size: .72rem; color: var(--sub); margin-bottom: 16px; min-height: 2.4em; line-height: 1.4; }
+.sticky-row { display: flex; gap: 6px; margin-bottom: 6px; }
+.sticky-pill { flex: 1; padding: 10px 2px; text-align: center; border-radius: 10px; background: var(--bg); border: 1.5px solid var(--sep); font-size: .74rem; font-weight: 600; color: var(--sub); cursor: pointer; }
+.sticky-pill.selected { background: var(--accent); border-color: var(--accent); color: #fff; }
+.sticky-hint { font-size: .68rem; color: var(--sub); margin-bottom: 14px; min-height: 1.3em; }
+textarea.field-input { min-height: 60px; resize: vertical; }
 .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; margin-bottom: 14px; }
 .toggle-label { font-size: .88rem; }
 .toggle { width: 48px; height: 28px; background: var(--sep); border-radius: 99px; position: relative; cursor: pointer; transition: background .2s; flex-shrink: 0; }
@@ -139,11 +176,15 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
 </head>
 <body>
 
-<!-- Today -->
-<div class="page active" id="pg-today">
+<!-- 吃药 tab -->
+<div class="page active" id="pg-meds">
   <div class="header">
     <div class="header-row">
-      <h1>今日打卡</h1>
+      <h1>今日吃药</h1>
+      <div class="header-actions">
+        <button class="icon-btn" onclick="openSubPage('meds-history')" title="吃药记录">📋</button>
+        <button class="icon-btn" onclick="openSubPage('meds-settings')" title="管理">⚙️</button>
+      </div>
     </div>
     <div class="date-sub" id="dateLabel"></div>
   </div>
@@ -152,18 +193,45 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
   <div id="bracesContainer"></div>
 </div>
 
-<!-- History -->
-<div class="page" id="pg-history">
-  <div class="header"><h1>打卡记录</h1></div>
+<!-- 排便 tab -->
+<div class="page" id="pg-bowel">
+  <div class="header">
+    <div class="header-row">
+      <h1>排便记录</h1>
+      <div class="header-actions">
+        <button class="icon-btn" onclick="openSubPage('bowel-history')" title="排便历史">📋</button>
+      </div>
+    </div>
+    <div class="date-sub" id="bowelDateLabel"></div>
+  </div>
+  <div class="bowel-quick-wrap">
+    <button class="add-btn" onclick="openAddBowel()">🚻 快速记一次</button>
+  </div>
+  <div id="bowelTodayList"></div>
+</div>
+
+<!-- 吃药记录 (sub-page) -->
+<div class="page" id="pg-meds-history">
+  <div class="header">
+    <div class="header-row with-back">
+      <button class="icon-btn back" onclick="closeSubPage()">‹</button>
+      <h1>吃药记录</h1>
+    </div>
+  </div>
   <div class="sec-label">用量统计</div>
   <div class="usage-wrap" id="usageWrap"></div>
   <div class="sec-label">每日明细</div>
-  <div class="hist-wrap" id="histWrap"><div class="empty">📭 还没有记录</div></div>
+  <div class="hist-wrap" id="medHistWrap"><div class="empty">📭 还没有记录</div></div>
 </div>
 
-<!-- Settings -->
-<div class="page" id="pg-settings">
-  <div class="header"><h1>管理</h1></div>
+<!-- 管理 (sub-page) -->
+<div class="page" id="pg-meds-settings">
+  <div class="header">
+    <div class="header-row with-back">
+      <button class="icon-btn back" onclick="closeSubPage()">‹</button>
+      <h1>管理</h1>
+    </div>
+  </div>
 
   <div class="sec-label">用药</div>
   <div class="settings-section">
@@ -184,11 +252,24 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
   </div>
 </div>
 
+<!-- 排便记录 (sub-page) -->
+<div class="page" id="pg-bowel-history">
+  <div class="header">
+    <div class="header-row with-back">
+      <button class="icon-btn back" onclick="closeSubPage()">‹</button>
+      <h1>排便记录</h1>
+    </div>
+  </div>
+  <div class="sec-label">趋势</div>
+  <div id="trendWrap"></div>
+  <div class="sec-label">每日明细</div>
+  <div class="hist-wrap" id="bowelHistWrap"><div class="empty">📭 还没有记录</div></div>
+</div>
+
 <!-- Tabbar -->
-<div class="tabbar">
-  <button class="tab-btn active" onclick="showPage('today',this)"><span class="tab-icon">💊</span><span class="tab-label">今日</span></button>
-  <button class="tab-btn" onclick="showPage('history',this)"><span class="tab-icon">📋</span><span class="tab-label">记录</span></button>
-  <button class="tab-btn" onclick="showPage('settings',this)"><span class="tab-icon">⚙️</span><span class="tab-label">管理</span></button>
+<div class="tabbar" id="tabbar">
+  <button class="tab-btn active" data-tab="meds" onclick="showPage('meds')"><span class="tab-icon">💊</span><span class="tab-label">吃药</span></button>
+  <button class="tab-btn" data-tab="bowel" onclick="showPage('bowel')"><span class="tab-icon">🚻</span><span class="tab-label">排便</span></button>
 </div>
 
 <!-- Edit Med Sheet -->
@@ -280,6 +361,40 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
   </div>
 </div>
 
+<!-- Edit Bowel Sheet -->
+<div class="overlay" id="bowelOverlay" onclick="closeBowelSheet(event)">
+  <div class="sheet">
+    <div class="sheet-title">
+      <span id="bowelSheetTitle">记录排便</span>
+      <button class="sheet-close" onclick="closeBowelSheet()">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="field-label">大便性状</div>
+      <div class="bristol-row" id="stoolRow"></div>
+      <div class="bristol-desc" id="stoolDescText">请选择一个类型</div>
+
+      <div class="field-label">黏腻程度（擦拭几次才干净）</div>
+      <div class="sticky-row" id="stickyRow"></div>
+      <div class="sticky-hint" id="stickyHint"></div>
+
+      <div class="toggle-row">
+        <span class="toggle-label">排便不尽感</span>
+        <div class="toggle" id="f-incomplete-toggle" onclick="toggleIncomplete()"></div>
+      </div>
+
+      <div class="field-label">饮食诱因（可选）</div>
+      <input class="field-input" id="f-triggers" placeholder="如：辛辣、乳制品、咖啡" maxlength="40">
+
+      <div class="field-label">备注（可选）</div>
+      <textarea class="field-input" id="f-bowel-note" placeholder="其他补充说明" maxlength="120"></textarea>
+    </div>
+    <div class="sheet-footer">
+      <button class="save-btn" onclick="saveBowel()">保存记录</button>
+      <span class="del-link" id="delBowelLink" onclick="deleteBowel()">删除此记录</span>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -297,14 +412,40 @@ const DEFAULT_MEDS = [
 ];
 const DEFAULT_BRACES = { currentSet:8, setStartDate:'2026-08-17', daysPerSet:10, totalSets:19 };
 
+const STOOL_TYPES = [
+  { id:'hard', value:1, group:'hard', label:'硬块', desc:'分离硬球或结块，偏便秘',
+    icon:'<svg viewBox="0 0 32 20"><circle cx="7" cy="10" r="5.5" fill="currentColor"/><circle cx="16" cy="10" r="5.5" fill="currentColor"/><circle cx="25" cy="10" r="5.5" fill="currentColor"/></svg>' },
+  { id:'dry', value:2, group:'normal', label:'偏干成形', desc:'分段状，正常偏干',
+    icon:'<svg viewBox="0 0 32 20"><rect x="1" y="7.5" width="8.5" height="5.5" rx="2.5" fill="currentColor"/><rect x="11.75" y="7.5" width="8.5" height="5.5" rx="2.5" fill="currentColor"/><rect x="22.5" y="7.5" width="8.5" height="5.5" rx="2.5" fill="currentColor"/></svg>' },
+  { id:'smooth', value:3, group:'normal', label:'光滑成形', desc:'光滑柔软条状，最理想',
+    icon:'<svg viewBox="0 0 32 20"><rect x="2" y="6" width="28" height="8" rx="4" fill="currentColor"/></svg>' },
+  { id:'soft', value:4, group:'loose', label:'软糊状', desc:'边缘模糊的软块或糊状',
+    icon:'<svg viewBox="0 0 32 20"><ellipse cx="11" cy="11" rx="9" ry="5.5" fill="currentColor" opacity=".9"/><ellipse cx="21" cy="9" rx="8" ry="5" fill="currentColor" opacity=".7"/></svg>' },
+  { id:'watery', value:5, group:'loose', label:'水样', desc:'完全水样无固形，偏腹泻',
+    icon:'<svg viewBox="0 0 32 20"><path d="M1 7 Q5 3 9 7 T17 7 T25 7 T31 7" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M1 14 Q5 10 9 14 T17 14 T25 14 T31 14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity=".6"/></svg>' },
+];
+const STICKY_LEVELS = [
+  { v:1, label:'1次' },
+  { v:2, label:'2次' },
+  { v:3, label:'3次' },
+  { v:4, label:'4次' },
+  { v:5, label:'5+次' },
+];
+const STATUS_COLOR = { done:'#22c55e', partial:'#ef4444', none:'#d6d6de' };
+
 // ─── State ──────────────────────────────────────────
 let S = {};
+let currentMainTab = 'meds';
 let editingMedId = null; // null = add new
 let editingDaily = 2;
 let editingEvery = 1;
 let editingColor = '#007aff';
 let editingAmount = 1;
 let bracesTemp = {};
+let editingBowelId = null; // null = add new
+let editingStoolType = '';
+let editingSticky = 1;
+let editingIncomplete = false;
 
 // ─── Utils ──────────────────────────────────────────
 const todayStr = () => { const d=new Date(); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; };
@@ -312,26 +453,28 @@ const p = n => String(n).padStart(2,'0');
 const daysBetween = (a,b) => Math.floor((new Date(b)-new Date(a))/86400000);
 const load = () => { try { S=JSON.parse(localStorage.getItem(KEY)||'null')||{}; } catch(e){S={};} };
 const save = () => localStorage.setItem(KEY, JSON.stringify(S));
+const stoolMeta = id => STOOL_TYPES.find(t => t.id === id);
+const stoolColor = group => group === 'hard' ? '#d97706' : group === 'loose' ? '#0ea5e9' : '#22c55e';
+const stoolTypeForValue = v => STOOL_TYPES.reduce((a,b) => Math.abs(b.value-v) < Math.abs(a.value-v) ? b : a);
 
 function ensureDefaults() {
   if (!S.meds) S.meds = JSON.parse(JSON.stringify(DEFAULT_MEDS));
   if (!S.braces) S.braces = { ...DEFAULT_BRACES };
   if (!S.history) S.history = {};
+  if (!S.bowel) S.bowel = [];
 }
 
-// ─── Render Today ────────────────────────────────────
-function renderToday() {
+// ─── Render Meds Tab ─────────────────────────────────
+function renderMedsToday() {
   const today = todayStr();
   if (!S.history[today]) S.history[today] = {};
   const H = S.history[today];
 
-  // Date label
   const now = new Date();
   const wk = ['周日','周一','周二','周三','周四','周五','周六'];
   document.getElementById('dateLabel').textContent =
     `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 ${wk[now.getDay()]}`;
 
-  // Meds
   const container = document.getElementById('medsContainer');
   let sectHtml = `<div class="sec-label">用药</div><div class="meds-grid">`;
   let allDone = true;
@@ -348,7 +491,6 @@ function renderToday() {
     if (!ended) hasMeds = true;
     if (!ended && !isSkip && done < m.daily) allDone = false;
 
-    // Course tag
     let tagText = '', tagStyle = '';
     if (m.endDate) {
       if (ended) {
@@ -360,7 +502,6 @@ function renderToday() {
       }
     }
 
-    // Dots
     let dotsHtml = '';
     if (!ended && !isSkip) {
       for (let i = 0; i < m.daily; i++) {
@@ -423,7 +564,7 @@ function tapDot(medId, dotIdx) {
     else showToast('已记录 · 记得间隔5分钟');
   }
   save();
-  renderToday();
+  renderMedsToday();
 }
 
 // ─── Braces ─────────────────────────────────────────
@@ -433,7 +574,7 @@ function renderBraces() {
   if (!b || !b.setStartDate) { container.innerHTML = ''; return; }
 
   const today = todayStr();
-  const daysSinceStart = daysBetween(b.setStartDate, today); // days since current set started
+  const daysSinceStart = daysBetween(b.setStartDate, today);
   const dayInSet = Math.max(1, Math.min(daysSinceStart + 1, b.daysPerSet));
   const isChangeDay = dayInSet >= b.daysPerSet;
   const daysUntilChange = b.daysPerSet - dayInSet;
@@ -459,12 +600,149 @@ function renderBraces() {
     <div class="${statusClass}">${statusText}</div>
   </div>`;
 
-  // Settings meta
   document.getElementById('bracesSettingsMeta').textContent =
     `第${b.currentSet}副 · 共${b.totalSets}副`;
 }
 
-// ─── Usage stats ──────────────────────────────────────
+// ─── Bowel ──────────────────────────────────────────
+function bowelRowHtml(b) {
+  const meta = stoolMeta(b.stoolType);
+  const c = stoolColor(meta.group);
+  const tags = [];
+  if (b.sticky > 1) tags.push(`擦${STICKY_LEVELS.find(s => s.v === b.sticky).label}才干净`);
+  if (b.incomplete) tags.push('排便不尽感');
+  if (b.triggers) tags.push(b.triggers);
+  return `<div class="bowel-row" onclick="openEditBowel('${b.id}')">
+    <div class="bristol-badge" style="background:${c}">${meta.icon}</div>
+    <div class="bowel-row-main">
+      <div class="bowel-row-top"><span class="bowel-type-name">${meta.label}</span><span class="bowel-time">${b.time}</span></div>
+      ${tags.length ? `<div class="bowel-tags">${tags.join(' · ')}</div>` : ''}
+      ${b.note ? `<div class="bowel-note-text">${b.note}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+function renderBowelTab() {
+  const now = new Date();
+  const wk = ['周日','周一','周二','周三','周四','周五','周六'];
+  document.getElementById('bowelDateLabel').textContent =
+    `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 ${wk[now.getDay()]}`;
+
+  const today = todayStr();
+  const todays = S.bowel.filter(b => b.date === today).sort((a,b) => b.ts - a.ts);
+  const container = document.getElementById('bowelTodayList');
+  container.innerHTML = todays.length
+    ? `<div class="sec-label">今日记录</div><div class="bowel-list">${todays.map(bowelRowHtml).join('')}</div>`
+    : `<div class="empty">📭 今日还没有记录</div>`;
+}
+
+function buildStoolRow(selected) {
+  document.getElementById('stoolRow').innerHTML = STOOL_TYPES.map(t => {
+    const c = stoolColor(t.group);
+    return `<div class="bristol-pill${t.id===selected?' selected':''}" style="--bc:${c}" onclick="selectStoolType('${t.id}')">
+      <div class="bristol-icon">${t.icon}</div>
+      <div class="bristol-pill-label">${t.label}</div>
+    </div>`;
+  }).join('');
+  const meta = selected ? stoolMeta(selected) : null;
+  document.getElementById('stoolDescText').textContent = meta ? `${meta.label} · ${meta.desc}` : '请选择一个类型';
+}
+
+function selectStoolType(id) {
+  editingStoolType = id;
+  buildStoolRow(id);
+}
+
+function buildStickyRow(selected) {
+  document.getElementById('stickyRow').innerHTML = STICKY_LEVELS.map(s =>
+    `<div class="sticky-pill${s.v===selected?' selected':''}" onclick="selectSticky(${s.v})">${s.label}</div>`
+  ).join('');
+  let hint = '';
+  if (selected === 1) hint = '擦1次就干净 · 完全不黏';
+  else if (selected >= 4) hint = `擦${STICKY_LEVELS.find(s=>s.v===selected).label}才干净 · 比较黏腻`;
+  document.getElementById('stickyHint').textContent = hint;
+}
+
+function selectSticky(v) {
+  editingSticky = v;
+  buildStickyRow(v);
+}
+
+function toggleIncomplete() {
+  editingIncomplete = !editingIncomplete;
+  document.getElementById('f-incomplete-toggle').className = 'toggle' + (editingIncomplete ? ' on' : '');
+}
+
+function openAddBowel() {
+  editingBowelId = null;
+  editingStoolType = ''; editingSticky = 1; editingIncomplete = false;
+  document.getElementById('bowelSheetTitle').textContent = '记录排便';
+  buildStoolRow('');
+  buildStickyRow(1);
+  document.getElementById('f-incomplete-toggle').className = 'toggle';
+  document.getElementById('f-triggers').value = '';
+  document.getElementById('f-bowel-note').value = '';
+  document.getElementById('delBowelLink').style.display = 'none';
+  document.getElementById('bowelOverlay').classList.add('show');
+}
+
+function openEditBowel(id) {
+  const b = S.bowel.find(x => x.id === id);
+  if (!b) return;
+  editingBowelId = id;
+  editingStoolType = b.stoolType; editingSticky = b.sticky || 1; editingIncomplete = !!b.incomplete;
+  document.getElementById('bowelSheetTitle').textContent = '编辑记录';
+  buildStoolRow(editingStoolType);
+  buildStickyRow(editingSticky);
+  document.getElementById('f-incomplete-toggle').className = 'toggle' + (editingIncomplete ? ' on' : '');
+  document.getElementById('f-triggers').value = b.triggers || '';
+  document.getElementById('f-bowel-note').value = b.note || '';
+  document.getElementById('delBowelLink').style.display = 'block';
+  document.getElementById('bowelOverlay').classList.add('show');
+}
+
+function closeBowelSheet(e) {
+  if (e && e.target !== document.getElementById('bowelOverlay')) return;
+  document.getElementById('bowelOverlay').classList.remove('show');
+}
+
+function saveBowel() {
+  if (!editingStoolType) { showToast('请选择大便性状'); return; }
+  const orig = editingBowelId ? S.bowel.find(x => x.id === editingBowelId) : null;
+  const now = new Date();
+  const entry = {
+    id: editingBowelId || 'b' + Date.now(),
+    date: orig ? orig.date : todayStr(),
+    time: orig ? orig.time : `${p(now.getHours())}:${p(now.getMinutes())}`,
+    ts: orig ? orig.ts : now.getTime(),
+    stoolType: editingStoolType,
+    sticky: editingSticky,
+    incomplete: editingIncomplete,
+    triggers: document.getElementById('f-triggers').value.trim(),
+    note: document.getElementById('f-bowel-note').value.trim(),
+  };
+  if (orig) {
+    S.bowel[S.bowel.findIndex(x => x.id === editingBowelId)] = entry;
+  } else {
+    S.bowel.push(entry);
+  }
+  save();
+  document.getElementById('bowelOverlay').classList.remove('show');
+  showToast(orig ? '已保存' : '已记录');
+  renderBowelTab();
+}
+
+function deleteBowel() {
+  if (!editingBowelId) return;
+  if (!confirm('确定删除这条排便记录吗？')) return;
+  S.bowel = S.bowel.filter(x => x.id !== editingBowelId);
+  save();
+  document.getElementById('bowelOverlay').classList.remove('show');
+  showToast('已删除');
+  renderBowelTab();
+}
+
+// ─── Usage stats (meds) ───────────────────────────────
 function medUsageStats(m) {
   const today = todayStr();
   const histDates = Object.keys(S.history).sort();
@@ -502,11 +780,115 @@ function renderUsage() {
   }).join('')}</div>`;
 }
 
-// ─── History ────────────────────────────────────────
-function renderHistory() {
+// ─── Trend (meds × bowel) ────────────────────────────
+function computeTrendDays() {
+  const days = [];
+  const base = new Date(todayStr());
+  for (let i = 13; i >= 0; i--) {
+    const d = new Date(base);
+    d.setDate(d.getDate() - i);
+    days.push(`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`);
+  }
+  return days;
+}
+
+function dayMedStatus(date) {
+  const H = S.history[date];
+  if (!H || !Object.keys(H).length) return 'none';
+  let hasMeds = false, allDone = true;
+  S.meds.forEach(m => {
+    if (m.endDate && date > m.endDate) return;
+    const isSkip = m.every === 2 && daysBetween(m.startDate || date, date) % 2 !== 0;
+    if (isSkip) return;
+    hasMeds = true;
+    if ((H[m.id] || 0) < m.daily) allDone = false;
+  });
+  if (!hasMeds) return 'none';
+  return allDone ? 'done' : 'partial';
+}
+
+function renderTrend() {
+  const wrap = document.getElementById('trendWrap');
+  if (!S.bowel.length) { wrap.innerHTML = '<div class="empty">📭 暂无排便记录</div>'; return; }
+
+  const days = computeTrendDays();
+  const W = 320, H = 160, padL = 22, padR = 8, top = 10, bottom = 104, adhY = 118;
+  const stepX = (W - padL - padR) / (days.length - 1);
+  const yFor = v => bottom - (v - 1) * ((bottom - top) / 4);
+
+  const avgs = days.map(d => {
+    const entries = S.bowel.filter(b => b.date === d);
+    if (!entries.length) return null;
+    return entries.reduce((s, b) => s + stoolMeta(b.stoolType).value, 0) / entries.length;
+  });
+
+  const bands = [
+    { from: 1, to: 1.5, color: '#d97706' },
+    { from: 1.5, to: 3.5, color: '#22c55e' },
+    { from: 3.5, to: 5, color: '#0ea5e9' },
+  ];
+  const bandRects = bands.map(b =>
+    `<rect x="${padL}" y="${yFor(b.to)}" width="${W-padL-padR}" height="${yFor(b.from)-yFor(b.to)}" fill="${b.color}" opacity="0.08"/>`
+  ).join('');
+
+  let pathParts = [], cur = [];
+  avgs.forEach((v, i) => {
+    if (v == null) { if (cur.length > 1) pathParts.push(cur); cur = []; return; }
+    cur.push([padL + i * stepX, yFor(v)]);
+  });
+  if (cur.length > 1) pathParts.push(cur);
+  const linesSvg = pathParts.map(pts =>
+    `<polyline points="${pts.map(p => p.join(',')).join(' ')}" fill="none" stroke="#8a8a93" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`
+  ).join('');
+
+  const dotsSvg = avgs.map((v, i) => {
+    if (v == null) return '';
+    const x = padL + i * stepX, y = yFor(v);
+    return `<circle cx="${x}" cy="${y}" r="4.5" fill="${stoolColor(stoolTypeForValue(v).group)}" stroke="#ffffff" stroke-width="2"/>`;
+  }).join('');
+
+  const adhSvg = days.map((d, i) => {
+    const x = padL + i * stepX;
+    return `<rect x="${x-4}" y="${adhY}" width="8" height="8" rx="2" fill="${STATUS_COLOR[dayMedStatus(d)]}"/>`;
+  }).join('');
+
+  const yLabels = [
+    { v:1, t:'硬' }, { v:2.5, t:'正常' }, { v:5, t:'稀' },
+  ].map(o => `<text x="${padL-5}" y="${yFor(o.v)+3}" text-anchor="end" font-size="7" fill="#8a8a93">${o.t}</text>`).join('');
+
+  const labelIdx = [0, Math.floor((days.length-1)/2), days.length-1];
+  const xLabels = labelIdx.map(i => {
+    const d = new Date(days[i]);
+    return `<text x="${padL + i*stepX}" y="150" text-anchor="middle" font-size="8" fill="#8a8a93">${d.getMonth()+1}/${d.getDate()}</text>`;
+  }).join('');
+
+  wrap.innerHTML = `
+  <div class="trend-legend">
+    <span><i style="background:#d97706"></i>偏硬</span>
+    <span><i style="background:#22c55e"></i>正常</span>
+    <span><i style="background:#0ea5e9"></i>偏稀</span>
+    <span class="trend-legend-sep"></span>
+    <span><i class="dot" style="background:${STATUS_COLOR.done}"></i>用药完成</span>
+    <span><i class="dot" style="background:${STATUS_COLOR.partial}"></i>有漏服</span>
+  </div>
+  <div class="trend-card">
+    <svg viewBox="0 0 ${W} ${H}" class="trend-svg">
+      ${bandRects}
+      ${linesSvg}
+      ${dotsSvg}
+      ${yLabels}
+      <text x="2" y="${adhY+7}" font-size="7" fill="#8a8a93">用药</text>
+      ${adhSvg}
+      ${xLabels}
+    </svg>
+  </div>`;
+}
+
+// ─── Meds history (sub-page) ─────────────────────────
+function renderMedsHistory() {
   renderUsage();
-  const wrap = document.getElementById('histWrap');
-  const days = Object.keys(S.history).sort().reverse().filter(d => Object.keys(S.history[d]).length > 0);
+  const wrap = document.getElementById('medHistWrap');
+  const days = Object.keys(S.history).filter(d => Object.keys(S.history[d]).length > 0).sort().reverse();
   if (!days.length) { wrap.innerHTML = '<div class="empty">📭 还没有记录<br>打卡后会显示在这里</div>'; return; }
 
   const wk = ['日','一','二','三','四','五','六'];
@@ -529,6 +911,23 @@ function renderHistory() {
       html += `<div class="hist-row"><div class="hist-dot" style="background:${m.color}"></div><div class="hist-name">${m.name}</div><div class="hist-count">${count}</div><div class="hist-icon">${icon}</div></div>`;
     });
     html += `</div></div>`;
+  });
+  wrap.innerHTML = html;
+}
+
+// ─── Bowel history (sub-page) ────────────────────────
+function renderBowelHistory() {
+  renderTrend();
+  const wrap = document.getElementById('bowelHistWrap');
+  const days = [...new Set(S.bowel.map(b => b.date))].sort().reverse();
+  if (!days.length) { wrap.innerHTML = '<div class="empty">📭 还没有记录<br>记录后会显示在这里</div>'; return; }
+
+  const wk = ['日','一','二','三','四','五','六'];
+  let html = '';
+  days.forEach(day => {
+    const d = new Date(day);
+    const bowelForDay = S.bowel.filter(b => b.date === day).sort((a,b) => b.ts - a.ts);
+    html += `<div class="hist-day"><div class="hist-date">${d.getMonth()+1}月${d.getDate()}日 周${wk[d.getDay()]}</div><div class="bowel-list" style="margin:0">${bowelForDay.map(bowelRowHtml).join('')}</div></div>`;
   });
   wrap.innerHTML = html;
 }
@@ -656,7 +1055,7 @@ function saveMed() {
   document.getElementById('medOverlay').classList.remove('show');
   showToast(editingMedId ? '已保存' : '药品已添加');
   renderSettings();
-  renderToday();
+  renderMedsToday();
 }
 
 function deleteMed() {
@@ -667,7 +1066,7 @@ function deleteMed() {
   document.getElementById('medOverlay').classList.remove('show');
   showToast('已删除');
   renderSettings();
-  renderToday();
+  renderMedsToday();
 }
 
 // ─── Braces editing ──────────────────────────────────
@@ -699,18 +1098,33 @@ function saveBraces() {
   document.getElementById('bracesOverlay').classList.remove('show');
   showToast('牙套设置已保存');
   renderSettings();
-  renderToday();
+  renderMedsToday();
 }
 
 // ─── Nav ────────────────────────────────────────────
-function showPage(name, btn) {
+function showPage(name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('pg-' + name).classList.add('active');
-  btn.classList.add('active');
-  if (name === 'history') renderHistory();
-  if (name === 'settings') renderSettings();
-  if (name === 'today') renderToday();
+  const btn = document.querySelector(`.tab-btn[data-tab="${name}"]`);
+  if (btn) btn.classList.add('active');
+  document.getElementById('tabbar').style.display = 'flex';
+  currentMainTab = name;
+  if (name === 'meds') renderMedsToday();
+  if (name === 'bowel') renderBowelTab();
+}
+
+function openSubPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('pg-' + name).classList.add('active');
+  document.getElementById('tabbar').style.display = 'none';
+  if (name === 'meds-history') renderMedsHistory();
+  if (name === 'meds-settings') renderSettings();
+  if (name === 'bowel-history') renderBowelHistory();
+}
+
+function closeSubPage() {
+  showPage(currentMainTab);
 }
 
 // ─── Toast ──────────────────────────────────────────
@@ -726,7 +1140,7 @@ function showToast(msg) {
   load();
   ensureDefaults();
   save();
-  renderToday();
+  renderMedsToday();
 })();
 </script>
 </body>
