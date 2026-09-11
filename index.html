@@ -438,6 +438,30 @@ textarea.field-input { min-height: 60px; resize: vertical; }
   </div>
 </div>
 
+<!-- Add/Edit Condition Group Sheet -->
+<div class="overlay" id="conditionOverlay" onclick="closeConditionSheet(event)">
+  <div class="sheet">
+    <div class="sheet-title">
+      <span id="conditionSheetTitle">添加病情分组</span>
+      <button class="sheet-close" onclick="closeConditionSheet()">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="field-label">分组名称</div>
+      <input class="field-input" id="f-cond-name" placeholder="例：肠道用药" maxlength="12">
+
+      <div class="field-label">图标（输入一个 emoji）</div>
+      <input class="field-input" id="f-cond-icon" placeholder="💊" maxlength="4">
+
+      <div class="field-label">颜色</div>
+      <div class="color-row" id="conditionColorRow"></div>
+    </div>
+    <div class="sheet-footer">
+      <button class="save-btn" onclick="saveCondition()">保存</button>
+      <span class="del-link" id="delConditionLink" onclick="deleteCondition()">删除此分组</span>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -498,6 +522,8 @@ let editingTaperStages = [];
 let editingShelfDays = 30;
 let editingBracesConditionId = null;
 let bracesTemp = {};
+let editingGroupId = null; // null = adding new group
+let editingGroupColor = '#007aff';
 let editingBowelId = null; // null = add new
 let editingBowelConditionId = null;
 let editingStoolType = '';
@@ -1110,6 +1136,11 @@ function renderSettings() {
       <div class="sec-label">${cond.icon} ${cond.name}</div>
       <div class="settings-section">
         <div class="settings-card">
+          <div class="settings-row" onclick="openEditCondition('${cond.id}')">
+            <span class="s-dot" style="background:${cond.color}"></span>
+            <span class="s-name">分组设置（改名称/图标/颜色）</span>
+            <span class="s-arrow">›</span>
+          </div>
           <div class="settings-row static">
             <span class="s-name">开始日期</span>
             <input class="field-input" type="date" style="width:150px;margin:0" value="${cond.startDate||''}" onchange="updateConditionStartDate('${cond.id}', this.value)">
@@ -1134,6 +1165,10 @@ function renderSettings() {
     }
   });
   html += `
+  <div class="sec-label">添加</div>
+  <div class="settings-section">
+    <button class="add-btn" onclick="openAddCondition()">＋ 添加病情分组</button>
+  </div>
   <div class="sec-label">显示顺序</div>
   <div class="settings-section">
     <div class="settings-card">
@@ -1152,6 +1187,73 @@ function renderSettings() {
 function updateConditionStartDate(id, val) {
   findCondition(id).startDate = val;
   save();
+}
+
+// ─── Add/edit condition group ─────────────────────────
+function buildConditionColorRow(selected) {
+  document.getElementById('conditionColorRow').innerHTML = COLORS.map(c =>
+    `<div class="color-swatch${c===selected?' selected':''}" style="background:${c}" onclick="selectConditionColor('${c}')"></div>`
+  ).join('');
+  editingGroupColor = selected;
+}
+
+function selectConditionColor(c) {
+  buildConditionColorRow(c);
+}
+
+function openAddCondition() {
+  editingGroupId = null;
+  editingGroupColor = '#007aff';
+  document.getElementById('conditionSheetTitle').textContent = '添加病情分组';
+  document.getElementById('f-cond-name').value = '';
+  document.getElementById('f-cond-icon').value = '💊';
+  document.getElementById('delConditionLink').style.display = 'none';
+  buildConditionColorRow(editingGroupColor);
+  document.getElementById('conditionOverlay').classList.add('show');
+}
+
+function openEditCondition(id) {
+  const cond = findCondition(id);
+  if (!cond) return;
+  editingGroupId = id;
+  editingGroupColor = cond.color;
+  document.getElementById('conditionSheetTitle').textContent = '编辑病情分组';
+  document.getElementById('f-cond-name').value = cond.name;
+  document.getElementById('f-cond-icon').value = cond.icon;
+  document.getElementById('delConditionLink').style.display = 'block';
+  buildConditionColorRow(editingGroupColor);
+  document.getElementById('conditionOverlay').classList.add('show');
+}
+
+function closeConditionSheet(e) {
+  if (e && e.target !== document.getElementById('conditionOverlay')) return;
+  document.getElementById('conditionOverlay').classList.remove('show');
+}
+
+function saveCondition() {
+  const name = document.getElementById('f-cond-name').value.trim();
+  if (!name) { showToast('请填写分组名称'); return; }
+  const icon = document.getElementById('f-cond-icon').value.trim() || '💊';
+  if (editingGroupId) {
+    const cond = findCondition(editingGroupId);
+    cond.name = name; cond.icon = icon; cond.color = editingGroupColor;
+  } else {
+    S.conditions.push({ id:'c'+Date.now(), name, icon, color: editingGroupColor, kind:'meds', startDate:'', meds:[] });
+  }
+  save();
+  document.getElementById('conditionOverlay').classList.remove('show');
+  showToast(editingGroupId ? '已保存' : '已添加分组');
+  renderSettings();
+}
+
+function deleteCondition() {
+  if (!editingGroupId) return;
+  if (!confirm('确定删除这个分组吗？分组里的药品也会一并删除，打卡记录会保留但不再显示。')) return;
+  S.conditions = S.conditions.filter(c => c.id !== editingGroupId);
+  save();
+  document.getElementById('conditionOverlay').classList.remove('show');
+  showToast('已删除');
+  renderSettings();
 }
 
 function renderCondMedsList(cond) {
