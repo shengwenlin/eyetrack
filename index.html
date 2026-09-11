@@ -28,25 +28,27 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
 .done-banner.show { display: block; }
 
 /* ── Section label ── */
-.sec-label { font-size: .66rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); padding: 12px 22px 6px; }
+.sec-label { font-size: .66rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--sub); padding: 14px 22px 6px; }
 
-/* ── Med grid ── */
-.meds-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 18px 4px; }
+/* ── Med list (one per row) ── */
+.meds-list { display: flex; flex-direction: column; gap: 10px; padding: 0 18px 4px; }
 .med-card { background: var(--card); border-radius: 18px; padding: 13px 14px 12px; box-shadow: 0 1px 2px rgba(0,0,0,.03), 0 4px 14px rgba(0,0,0,.03); min-width: 0; }
 .med-card.ended { opacity: .4; pointer-events: none; }
 .card-top { margin-bottom: 9px; }
 .card-head { display: flex; align-items: flex-start; gap: 7px; }
 .color-bar { width: 3px; min-height: 16px; border-radius: 99px; flex-shrink: 0; margin-top: 2px; }
-.med-name { font-size: .87rem; font-weight: 700; flex: 1; min-width: 0; line-height: 1.3; }
-.course-tag { font-size: .58rem; font-weight: 700; padding: 2px 7px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
-.med-amount { font-size: .68rem; color: var(--accent); font-weight: 700; margin: 4px 0 0 10px; }
-.med-desc { font-size: .63rem; color: var(--sub); margin: 2px 0 0 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.dose-row { display: flex; align-items: center; justify-content: space-between; gap: 5px; margin-top: 9px; }
+.med-name { font-size: .9rem; font-weight: 700; flex: 1; min-width: 0; line-height: 1.3; }
+.course-tag { font-size: .6rem; font-weight: 700; padding: 2px 7px; border-radius: 99px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+.med-amount { font-size: .7rem; color: var(--accent); font-weight: 700; margin: 4px 0 0 10px; }
+.med-desc { font-size: .65rem; color: var(--sub); margin: 2px 0 0 10px; }
+.med-shelf { font-size: .65rem; color: var(--sub); margin: 2px 0 0 10px; font-weight: 600; }
+.med-shelf.urgent { color: var(--red); }
+.dose-row { display: flex; align-items: center; justify-content: space-between; gap: 5px; margin-top: 9px; flex-wrap: wrap; }
 .dose-dots { display: flex; gap: 6px; flex-wrap: wrap; }
-.dot { width: 26px; height: 26px; border-radius: 50%; border: none; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: .65rem; font-weight: 600; color: var(--sub); cursor: pointer; transition: all .15s; flex-shrink: 0; user-select: none; -webkit-user-select: none; }
+.dot { width: 27px; height: 27px; border-radius: 50%; border: none; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: .66rem; font-weight: 600; color: var(--sub); cursor: pointer; transition: all .15s; flex-shrink: 0; user-select: none; -webkit-user-select: none; }
 .dot:active { transform: scale(.88); }
-.dot.filled { background: var(--c); color: #fff; font-size: .74rem; }
-.dose-label { font-size: .66rem; color: var(--sub); white-space: nowrap; font-weight: 600; }
+.dot.filled { background: var(--c); color: #fff; font-size: .76rem; }
+.dose-label { font-size: .68rem; color: var(--sub); white-space: nowrap; font-weight: 600; }
 .dose-label.complete { color: var(--green); font-weight: 700; }
 .skip-msg { font-size: .63rem; color: var(--sub); padding: 5px 0 0; display: none; }
 .skip-msg.show { display: block; }
@@ -74,8 +76,8 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
 .bowel-note-text { font-size: .72rem; color: var(--text); margin-top: 3px; line-height: 1.4; }
 
 /* ── History ── */
-.usage-wrap { padding: 4px 18px 6px; }
-.usage-card { background: var(--card); border-radius: 18px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.03), 0 4px 14px rgba(0,0,0,.03); margin-bottom: 4px; }
+.usage-wrap { padding: 4px 0 6px; }
+.usage-card { background: var(--card); border-radius: 18px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.03), 0 4px 14px rgba(0,0,0,.03); margin: 0 18px 4px; }
 .usage-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--sep); }
 .usage-row:last-child { border-bottom: none; }
 .usage-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
@@ -102,7 +104,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
 .hist-name { font-size: .83rem; flex: 1; }
 .hist-count { font-size: .7rem; color: var(--sub); }
 .hist-icon { font-size: .88rem; }
-.empty { text-align: center; padding: 70px 24px; color: var(--sub); font-size: .88rem; line-height: 1.9; }
+.empty { text-align: center; padding: 60px 24px; color: var(--sub); font-size: .88rem; line-height: 1.9; }
 
 /* ── Settings ── */
 .settings-section { margin: 0 18px 22px; }
@@ -110,10 +112,14 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
 .settings-row { display: flex; align-items: center; gap: 10px; padding: 13px 15px; border-bottom: 1px solid var(--sep); cursor: pointer; transition: background .15s; }
 .settings-row:last-child { border-bottom: none; }
 .settings-row:active { background: var(--bg); }
+.settings-row.static { cursor: default; }
+.settings-row.static:active { background: none; }
 .s-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 .s-name { font-size: .88rem; flex: 1; font-weight: 500; }
 .s-meta { font-size: .7rem; color: var(--sub); }
 .s-arrow { color: var(--sub); font-size: .8rem; }
+.reorder-btn { width: 30px; height: 30px; border-radius: 8px; border: 1.5px solid var(--sep); background: var(--bg); font-size: .95rem; color: var(--text); cursor: pointer; flex-shrink: 0; }
+.reorder-btn:disabled { opacity: .3; }
 .add-btn { width: 100%; margin-top: 10px; padding: 14px; background: var(--accent); color: #fff; border: none; border-radius: 14px; font-size: .88rem; font-weight: 600; font-family: inherit; cursor: pointer; }
 .add-btn.secondary { background: var(--card); color: var(--accent); border: 1.5px solid var(--accent); margin-top: 8px; }
 .danger-btn { width: 100%; margin-top: 8px; padding: 14px; background: var(--card); color: var(--red); border: 1.5px solid var(--red); border-radius: 14px; font-size: .88rem; font-weight: 600; font-family: inherit; cursor: pointer; }
@@ -133,6 +139,9 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
 .stepper-btn { width: 44px; height: 42px; border: none; background: none; font-size: 1.3rem; color: var(--accent); cursor: pointer; font-family: inherit; flex-shrink: 0; }
 .stepper-btn:active { background: var(--sep); }
 .stepper-val { flex: 1; text-align: center; font-size: .95rem; font-weight: 600; }
+.stepper.small { margin-bottom: 0; flex: 1; }
+.stepper.small .stepper-btn { width: 32px; height: 34px; font-size: 1.05rem; }
+.stepper.small .stepper-val { font-size: .74rem; }
 .amount-row { display: flex; gap: 8px; align-items: stretch; }
 .amount-row .stepper { flex: 1; margin-bottom: 14px; }
 .amount-row .field-input { width: 88px; margin-bottom: 14px; flex-shrink: 0; }
@@ -151,6 +160,10 @@ body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', -
 .sticky-pill { flex: 1; padding: 10px 2px; text-align: center; border-radius: 10px; background: var(--bg); border: 1.5px solid var(--sep); font-size: .74rem; font-weight: 600; color: var(--sub); cursor: pointer; }
 .sticky-pill.selected { background: var(--accent); border-color: var(--accent); color: #fff; }
 .sticky-hint { font-size: .68rem; color: var(--sub); margin-bottom: 14px; min-height: 1.3em; }
+.taper-stage-row { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+.taper-stage-idx { font-size: .72rem; color: var(--sub); font-weight: 600; width: 44px; flex-shrink: 0; }
+.taper-stage-forever { font-size: .78rem; color: var(--text); font-weight: 600; flex: 1; }
+.taper-remove-btn { width: 30px; height: 30px; border-radius: 8px; border: 1.5px solid var(--sep); background: var(--bg); color: var(--red); font-size: .85rem; cursor: pointer; flex-shrink: 0; }
 textarea.field-input { min-height: 60px; resize: vertical; }
 .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; margin-bottom: 14px; }
 .toggle-label { font-size: .88rem; }
@@ -193,7 +206,6 @@ textarea.field-input { min-height: 60px; resize: vertical; }
   </div>
   <div class="done-banner" id="doneBanner">🎉 今日全部完成！</div>
   <div id="medsContainer"></div>
-  <div id="bracesContainer"></div>
 </div>
 
 <!-- 排便 tab -->
@@ -208,7 +220,7 @@ textarea.field-input { min-height: 60px; resize: vertical; }
     <div class="date-sub" id="bowelDateLabel"></div>
   </div>
   <div class="bowel-quick-wrap">
-    <button class="add-btn" onclick="openAddBowel()">🚻 快速记一次</button>
+    <button class="add-btn" onclick="openAddBowel('gut')">🚻 快速记一次</button>
   </div>
   <div id="bowelTodayList"></div>
 </div>
@@ -235,24 +247,7 @@ textarea.field-input { min-height: 60px; resize: vertical; }
       <h1>管理</h1>
     </div>
   </div>
-
-  <div class="sec-label">用药</div>
-  <div class="settings-section">
-    <div class="settings-card" id="medsSettingsList"></div>
-    <button class="add-btn" onclick="openAddMed()">＋ 添加新药品</button>
-  </div>
-
-  <div class="sec-label">牙套</div>
-  <div class="settings-section">
-    <div class="settings-card">
-      <div class="settings-row" onclick="openEditBraces()">
-        <span class="s-dot" style="background:#4f46e5"></span>
-        <span class="s-name">牙套进度设置</span>
-        <span class="s-meta" id="bracesSettingsMeta"></span>
-        <span class="s-arrow">›</span>
-      </div>
-    </div>
-  </div>
+  <div id="medsSettingsBody"></div>
 </div>
 
 <!-- 排便记录 (sub-page) -->
@@ -267,6 +262,20 @@ textarea.field-input { min-height: 60px; resize: vertical; }
   <div id="trendWrap"></div>
   <div class="sec-label">每日明细</div>
   <div class="hist-wrap" id="bowelHistWrap"><div class="empty">📭 还没有记录</div></div>
+</div>
+
+<!-- 调整分组顺序 (sub-page) -->
+<div class="page" id="pg-reorder">
+  <div class="header">
+    <div class="header-row with-back">
+      <button class="icon-btn back" onclick="closeReorder()">‹</button>
+      <h1>调整分组顺序</h1>
+    </div>
+  </div>
+  <div class="sec-label">用箭头调整"今日吃药"页面里各分组的先后顺序</div>
+  <div class="settings-section">
+    <div class="settings-card" id="reorderList"></div>
+  </div>
 </div>
 
 <!-- Tabbar -->
@@ -292,11 +301,24 @@ textarea.field-input { min-height: 60px; resize: vertical; }
       <div class="field-label">颜色</div>
       <div class="color-row" id="colorRow"></div>
 
-      <div class="field-label">每日次数</div>
-      <div class="stepper">
-        <button class="stepper-btn" onclick="stepDaily(-1)">−</button>
-        <span class="stepper-val" id="f-daily-val">2</span>
-        <button class="stepper-btn" onclick="stepDaily(1)">＋</button>
+      <div class="toggle-row">
+        <span class="toggle-label">阶梯递减（如眼药水逐周减量）</span>
+        <div class="toggle" id="f-dosemode-toggle" onclick="toggleDoseMode()"></div>
+      </div>
+
+      <div id="fixedDoseField">
+        <div class="field-label">每日次数</div>
+        <div class="stepper">
+          <button class="stepper-btn" onclick="stepDaily(-1)">−</button>
+          <span class="stepper-val" id="f-daily-val">2</span>
+          <button class="stepper-btn" onclick="stepDaily(1)">＋</button>
+        </div>
+      </div>
+
+      <div id="taperField" style="display:none">
+        <div class="field-label">递减阶段（从开始日期起按顺序推进）</div>
+        <div id="taperStagesList"></div>
+        <button class="add-btn secondary" onclick="addTaperStage()">＋ 添加阶段</button>
       </div>
 
       <div class="field-label">每次用量（可选，如 2 粒 / 1 滴）</div>
@@ -321,6 +343,18 @@ textarea.field-input { min-height: 60px; resize: vertical; }
 
       <div class="field-label">疗程结束日期（留空 = 不限）</div>
       <input class="field-input" id="f-endDate" type="date">
+
+      <div class="field-label">开封日期（可选，留空 = 不跟踪保质期）</div>
+      <input class="field-input" id="f-openDate" type="date" onchange="onOpenDateChange()">
+
+      <div id="shelfDaysField" style="display:none">
+        <div class="field-label">开封后可用天数</div>
+        <div class="stepper">
+          <button class="stepper-btn" onclick="stepShelfDays(-1)">−</button>
+          <span class="stepper-val" id="f-shelfDays-val">30</span>
+          <button class="stepper-btn" onclick="stepShelfDays(1)">＋</button>
+        </div>
+      </div>
     </div>
     <div class="sheet-footer">
       <button class="save-btn" onclick="saveMed()">保存</button>
@@ -408,18 +442,26 @@ textarea.field-input { min-height: 60px; resize: vertical; }
 
 <script>
 // ─── Constants ──────────────────────────────────────
-const KEY = 'tracker_v8';
+const KEY = 'tracker_v9';
 const COLORS = ['#007aff','#34c759','#ff9500','#af52de','#00b4d8','#ff2d55','#ff3b30','#5856d6','#30b0c7','#32ade6'];
 
-const DEFAULT_MEDS = [
-  { id:'m1', name:'异维A酸',  desc:'服满370颗',   color:'#af52de', daily:1, perDose:1, unit:'粒', endDate:'2028-03-08', every:1, startDate:'' },
-  { id:'m2', name:'维生素D',  desc:'',            color:'#ff9500', daily:1, perDose:1, unit:'粒', endDate:'',           every:1, startDate:'' },
-  { id:'m3', name:'叶黄素',   desc:'',            color:'#ffcc00', daily:1, perDose:1, unit:'粒', endDate:'',           every:1, startDate:'' },
-  { id:'m4', name:'奥洛他定', desc:'',            color:'#007aff', daily:3, perDose:1, unit:'滴', endDate:'2026-08-27', every:1, startDate:'' },
-  { id:'m5', name:'人工泪液', desc:'',            color:'#007aff', daily:4, perDose:1, unit:'滴', endDate:'2026-08-27', every:1, startDate:'' },
-  { id:'m6', name:'氟米龙',   desc:'',            color:'#007aff', daily:3, perDose:1, unit:'滴', endDate:'2026-08-28', every:1, startDate:'' },
+const DEFAULT_CONDITIONS = [
+  { id:'conj', name:'过敏性结膜炎', icon:'👁️', color:'#007aff', kind:'meds', startDate:'2026-01-01',
+    meds:[
+      { id:'m4', name:'奥洛他定', desc:'', color:'#007aff', doseMode:'fixed', daily:3, taperStages:[], perDose:1, unit:'滴', endDate:'2026-08-27', every:1, startDate:'', openDate:'', shelfDays:30 },
+      { id:'m5', name:'人工泪液', desc:'', color:'#007aff', doseMode:'fixed', daily:4, taperStages:[], perDose:1, unit:'滴', endDate:'2026-08-27', every:1, startDate:'', openDate:'', shelfDays:30 },
+      { id:'m6', name:'氟米龙',   desc:'', color:'#007aff', doseMode:'fixed', daily:3, taperStages:[], perDose:1, unit:'滴', endDate:'2026-08-28', every:1, startDate:'', openDate:'', shelfDays:30 },
+    ] },
+  { id:'rhinitis', name:'过敏性鼻炎', icon:'🤧', color:'#34c759', kind:'meds', startDate:'', meds:[] },
+  { id:'braces', name:'牙套矫正', icon:'🦷', color:'#af52de', kind:'braces', startDate:'2026-08-17',
+    braces:{ currentSet:8, setStartDate:'2026-08-17', daysPerSet:10, totalSets:19 } },
+  { id:'gut', name:'肠道调整', icon:'🚻', color:'#0ea5e9', kind:'bowel', startDate:'' },
+  { id:'daily', name:'日常保健', icon:'💊', color:'#ff9500', kind:'meds', startDate:'',
+    meds:[
+      { id:'m2', name:'维生素D', desc:'', color:'#ff9500', doseMode:'fixed', daily:1, taperStages:[], perDose:1, unit:'粒', endDate:'', every:1, startDate:'', openDate:'', shelfDays:0 },
+      { id:'m3', name:'叶黄素',   desc:'', color:'#ffcc00', doseMode:'fixed', daily:1, taperStages:[], perDose:1, unit:'粒', endDate:'', every:1, startDate:'', openDate:'', shelfDays:0 },
+    ] },
 ];
-const DEFAULT_BRACES = { currentSet:8, setStartDate:'2026-08-17', daysPerSet:10, totalSets:19 };
 
 const STOOL_TYPES = [
   { id:'hard', value:1, group:'hard', label:'硬块', desc:'分离硬球或结块，偏便秘',
@@ -445,13 +487,19 @@ const STATUS_COLOR = { done:'#22c55e', partial:'#ef4444', none:'#d6d6de' };
 // ─── State ──────────────────────────────────────────
 let S = {};
 let currentMainTab = 'meds';
+let editingConditionId = null;
 let editingMedId = null; // null = add new
 let editingDaily = 2;
 let editingEvery = 1;
 let editingColor = '#007aff';
 let editingAmount = 1;
+let editingDoseMode = 'fixed';
+let editingTaperStages = [];
+let editingShelfDays = 30;
+let editingBracesConditionId = null;
 let bracesTemp = {};
 let editingBowelId = null; // null = add new
+let editingBowelConditionId = null;
 let editingStoolType = '';
 let editingSticky = 1;
 let editingIncomplete = false;
@@ -466,14 +514,100 @@ const stoolMeta = id => STOOL_TYPES.find(t => t.id === id);
 const stoolColor = group => group === 'hard' ? '#d97706' : group === 'loose' ? '#0ea5e9' : '#22c55e';
 const stoolTypeForValue = v => STOOL_TYPES.reduce((a,b) => Math.abs(b.value-v) < Math.abs(a.value-v) ? b : a);
 
+const findCondition = id => S.conditions.find(c => c.id === id);
+const allMeds = () => S.conditions.filter(c => c.kind === 'meds').flatMap(c => c.meds);
+const findMed = id => allMeds().find(m => m.id === id);
+const findMedCondition = id => S.conditions.find(c => c.kind === 'meds' && c.meds.some(m => m.id === id));
+
+function medDailyDose(m, dateStr) {
+  if (m.doseMode !== 'taper' || !m.taperStages || !m.taperStages.length) return m.daily;
+  if (!m.startDate) return m.taperStages[0].daily;
+  const elapsed = daysBetween(m.startDate, dateStr);
+  if (elapsed < 0) return m.taperStages[0].daily;
+  let acc = 0;
+  for (let i = 0; i < m.taperStages.length; i++) {
+    const stage = m.taperStages[i];
+    if (i === m.taperStages.length - 1 || elapsed < acc + stage.days) return stage.daily;
+    acc += stage.days;
+  }
+  return m.taperStages[m.taperStages.length - 1].daily;
+}
+
+function shelfInfo(m, today) {
+  if (!m.openDate) return null;
+  const used = daysBetween(m.openDate, today);
+  const remain = (m.shelfDays || 0) - used;
+  if (remain <= 0) return { text: '该换新的了', urgent: true };
+  if (remain <= 3) return { text: `还能用${remain}天`, urgent: true };
+  return { text: `开封第${used+1}天 · 还能用${remain}天`, urgent: false };
+}
+
+function condDurationSuffix(cond) {
+  if (!cond.startDate) return '';
+  const days = daysBetween(cond.startDate, todayStr()) + 1;
+  return ` · 已进行${days}天`;
+}
+
+// One-time migration from the old flat schema (KEY 'tracker_v8': S.meds/S.braces/S.bowel
+// with no condition grouping) into the new conditions-based schema. Runs only when this
+// browser has real v8 data and hasn't migrated yet, so real logged history/bowel/meds
+// carry forward instead of silently resetting to fresh defaults.
+const OLD_MED_ID_TO_CONDITION = { m1:'daily', m2:'daily', m3:'daily', m4:'conj', m5:'conj', m6:'conj', m7:'conj', m8:'daily' };
+
+function migrateFromOldSchema() {
+  let old;
+  try { old = JSON.parse(localStorage.getItem('tracker_v8') || 'null'); } catch(e) { old = null; }
+  if (!old || !Array.isArray(old.meds)) return null;
+
+  const conditions = JSON.parse(JSON.stringify(DEFAULT_CONDITIONS));
+  conditions.forEach(c => { if (c.kind === 'meds') c.meds = []; });
+
+  old.meds.forEach(m => {
+    const groupId = OLD_MED_ID_TO_CONDITION[m.id] || 'daily';
+    const cond = conditions.find(c => c.id === groupId);
+    cond.meds.push({
+      id: m.id, name: m.name, desc: m.desc || '', color: m.color,
+      doseMode: m.doseMode || 'fixed',
+      daily: m.daily || 1,
+      taperStages: m.taperStages || [],
+      perDose: m.perDose || 1,
+      unit: m.unit || '',
+      endDate: m.endDate || '',
+      startDate: m.startDate || '',
+      every: m.every || 1,
+      openDate: m.openDate || '',
+      shelfDays: m.shelfDays || 30,
+    });
+  });
+
+  if (old.braces) {
+    conditions.find(c => c.id === 'braces').braces = { ...old.braces };
+  }
+
+  return {
+    conditions,
+    history: old.history || {},
+    bowel: (old.bowel || []).map(b => ({ conditionId: 'gut', ...b })),
+  };
+}
+
 function ensureDefaults() {
-  if (!S.meds) S.meds = JSON.parse(JSON.stringify(DEFAULT_MEDS));
-  if (!S.braces) S.braces = { ...DEFAULT_BRACES };
+  if (!S.conditions) {
+    const migrated = migrateFromOldSchema();
+    if (migrated) {
+      S.conditions = migrated.conditions;
+      S.history = migrated.history;
+      S.bowel = migrated.bowel;
+      showToast('已从旧版本迁移数据');
+      return;
+    }
+    S.conditions = JSON.parse(JSON.stringify(DEFAULT_CONDITIONS));
+  }
   if (!S.history) S.history = {};
   if (!S.bowel) S.bowel = [];
 }
 
-// ─── Render Meds Tab ─────────────────────────────────
+// ─── Meds tab (grouped by condition) ──────────────────
 function renderMedsToday() {
   const today = todayStr();
   if (!S.history[today]) S.history[today] = {};
@@ -485,81 +619,86 @@ function renderMedsToday() {
     `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 ${wk[now.getDay()]}`;
 
   const container = document.getElementById('medsContainer');
-  let sectHtml = `<div class="sec-label">用药</div><div class="meds-grid">`;
-  let allDone = true;
-  let hasMeds = false;
+  let html = '';
+  let allDone = true, hasMeds = false;
 
-  S.meds.forEach(m => {
-    const ended = m.endDate && today > m.endDate;
-    const done = H[m.id] || 0;
-    const isSkip = m.every === 2 && (() => {
-      const ref = m.startDate || today;
-      return daysBetween(ref, today) % 2 !== 0;
-    })();
+  S.conditions.forEach(cond => {
+    if (cond.kind === 'meds') {
+      if (!cond.meds.length) return;
+      const rows = cond.meds.map(m => {
+        const ended = m.endDate && today > m.endDate;
+        const need = medDailyDose(m, today);
+        const done = H[m.id] || 0;
+        const isSkip = m.every === 2 && daysBetween(m.startDate || today, today) % 2 !== 0;
 
-    if (!ended) hasMeds = true;
-    if (!ended && !isSkip && done < m.daily) allDone = false;
+        if (!ended) hasMeds = true;
+        if (!ended && !isSkip && done < need) allDone = false;
 
-    let tagText = '', tagStyle = '';
-    if (m.endDate) {
-      if (ended) {
-        tagText = '停药'; tagStyle = `background:#f2f2f7;color:#8e8e93`;
-      } else {
-        const rem = daysBetween(today, m.endDate) + 1;
-        tagText = `剩${rem}天`;
-        tagStyle = rem <= 3 ? `background:#ffeeee;color:#ff3b30` : `background:${m.color}18;color:${m.color}`;
-      }
+        let tagText = '', tagStyle = '';
+        if (m.endDate) {
+          if (ended) {
+            tagText = '停药'; tagStyle = `background:#f2f2f7;color:#8e8e93`;
+          } else {
+            const rem = daysBetween(today, m.endDate) + 1;
+            tagText = `剩${rem}天`;
+            tagStyle = rem <= 3 ? `background:#ffeeee;color:#ff3b30` : `background:${m.color}18;color:${m.color}`;
+          }
+        }
+
+        let dotsHtml = '';
+        if (!ended && !isSkip) {
+          for (let i = 0; i < need; i++) {
+            const filled = i < done;
+            dotsHtml += `<div class="dot${filled?' filled':''}" style="--c:${m.color}" onclick="tapDot('${m.id}',${i})">${filled?'✓':i+1}</div>`;
+          }
+        }
+
+        let labelText = '', labelClass = 'dose-label';
+        if (ended) { labelText = '停药'; }
+        else if (isSkip) { labelText = '今日免服'; }
+        else if (done >= need) { labelText = '✓'; labelClass = 'dose-label complete'; }
+        else { labelText = `${done}/${need}`; }
+
+        const amountLine = m.unit ? `每次 ${m.perDose || 1}${m.unit}` : '';
+        const shelf = shelfInfo(m, today);
+
+        return `
+        <div class="med-card${ended?' ended':''}" id="mc-${m.id}">
+          <div class="card-top">
+            <div class="card-head">
+              <div class="color-bar" style="background:${m.color}"></div>
+              <div class="med-name">${m.name}</div>
+              ${tagText ? `<div class="course-tag" style="${tagStyle}">${tagText}</div>` : ''}
+            </div>
+            ${amountLine ? `<div class="med-amount">${amountLine}</div>` : ''}
+            ${m.desc ? `<div class="med-desc">${m.desc}</div>` : ''}
+            ${shelf ? `<div class="med-shelf${shelf.urgent?' urgent':''}">${shelf.text}</div>` : ''}
+          </div>
+          <div class="dose-row">
+            <div class="dose-dots">${dotsHtml}</div>
+            <div class="${labelClass}">${labelText}</div>
+          </div>
+          ${isSkip && !ended ? `<div class="skip-msg show">💤 明日再服</div>` : ''}
+        </div>`;
+      }).join('');
+      html += `<div class="sec-label">${cond.icon} ${cond.name}${condDurationSuffix(cond)}</div><div class="meds-list">${rows}</div>`;
+    } else if (cond.kind === 'braces') {
+      html += bracesSectionHtml(cond);
     }
-
-    let dotsHtml = '';
-    if (!ended && !isSkip) {
-      for (let i = 0; i < m.daily; i++) {
-        const filled = i < done;
-        dotsHtml += `<div class="dot${filled?' filled':''}" style="--c:${m.color}" onclick="tapDot('${m.id}',${i})">${filled?'✓':i+1}</div>`;
-      }
-    }
-
-    let labelText = '', labelClass = 'dose-label';
-    if (ended) { labelText = '停药'; }
-    else if (isSkip) { labelText = '今日免服'; }
-    else if (done >= m.daily) { labelText = '✓'; labelClass = 'dose-label complete'; }
-    else { labelText = `${done}/${m.daily}`; }
-
-    const amountLine = m.unit ? `每次 ${m.perDose || 1}${m.unit}` : '';
-
-    sectHtml += `
-    <div class="med-card${ended?' ended':''}" id="mc-${m.id}">
-      <div class="card-top">
-        <div class="card-head">
-          <div class="color-bar" style="background:${m.color}"></div>
-          <div class="med-name">${m.name}</div>
-          ${tagText ? `<div class="course-tag" style="${tagStyle}">${tagText}</div>` : ''}
-        </div>
-        ${amountLine ? `<div class="med-amount">${amountLine}</div>` : ''}
-        ${m.desc ? `<div class="med-desc">${m.desc}</div>` : ''}
-      </div>
-      <div class="dose-row">
-        <div class="dose-dots">${dotsHtml}</div>
-        <div class="${labelClass}">${labelText}</div>
-      </div>
-      ${isSkip && !ended ? `<div class="skip-msg show">💤 明日再服</div>` : ''}
-    </div>`;
   });
 
-  sectHtml += '</div>';
-  container.innerHTML = sectHtml;
+  container.innerHTML = html || `<div class="empty">📭 还没有添加任何药品<br>点右上角 ⚙️ 去添加</div>`;
   document.getElementById('doneBanner').classList.toggle('show', allDone && hasMeds);
-
-  renderBraces();
 }
 
 function tapDot(medId, dotIdx) {
   const today = todayStr();
   if (!S.history[today]) S.history[today] = {};
   const H = S.history[today];
-  const m = S.meds.find(x => x.id === medId);
+  const m = findMed(medId);
   if (!m) return;
   if (m.endDate && today > m.endDate) { showToast('疗程已结束'); return; }
+  const need = medDailyDose(m, today);
 
   const cur = H[medId] || 0;
   if (dotIdx < cur) {
@@ -567,18 +706,20 @@ function tapDot(medId, dotIdx) {
     showToast('已撤销');
   } else {
     H[medId] = dotIdx + 1;
-    if (H[medId] === m.daily) showToast(`✅ ${m.name} 今日完成！`);
+    if (H[medId] === need) showToast(`✅ ${m.name} 今日完成！`);
     else showToast('已记录 · 记得间隔5分钟');
   }
   save();
   renderMedsToday();
 }
 
-// ─── Braces ─────────────────────────────────────────
-function renderBraces() {
-  const b = S.braces;
-  const container = document.getElementById('bracesContainer');
-  if (!b || !b.setStartDate) { container.innerHTML = ''; return; }
+// ─── Braces section ───────────────────────────────────
+function bracesSectionHtml(cond) {
+  const b = cond.braces;
+  const dur = condDurationSuffix(cond);
+  if (!b || !b.setStartDate) {
+    return `<div class="sec-label">${cond.icon} ${cond.name}${dur}</div><div class="empty">📭 还没有设置牙套信息<br>去管理里设置</div>`;
+  }
 
   const today = todayStr();
   const daysSinceStart = daysBetween(b.setStartDate, today);
@@ -597,8 +738,8 @@ function renderBraces() {
     statusText = `还有 ${daysUntilChange} 天换副`;
   }
 
-  container.innerHTML = `
-  <div class="sec-label">牙套</div>
+  return `
+  <div class="sec-label">${cond.icon} ${cond.name}${dur}</div>
   <div class="braces-card">
     <div class="braces-top">
       <div class="braces-set-num">第 ${b.currentSet} 副</div>
@@ -606,12 +747,9 @@ function renderBraces() {
     </div>
     <div class="${statusClass}">${statusText}</div>
   </div>`;
-
-  document.getElementById('bracesSettingsMeta').textContent =
-    `第${b.currentSet}副 · 共${b.totalSets}副`;
 }
 
-// ─── Bowel ──────────────────────────────────────────
+// ─── Bowel tab ────────────────────────────────────────
 function bowelRowHtml(b) {
   const meta = stoolMeta(b.stoolType);
   const c = stoolColor(meta.group);
@@ -636,11 +774,19 @@ function renderBowelTab() {
     `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 ${wk[now.getDay()]}`;
 
   const today = todayStr();
-  const todays = S.bowel.filter(b => b.date === today).sort((a,b) => b.ts - a.ts);
+  const todays = S.bowel.filter(b => b.conditionId === 'gut' && b.date === today).sort((a,b) => b.ts - a.ts);
   const container = document.getElementById('bowelTodayList');
   container.innerHTML = todays.length
     ? `<div class="sec-label">今日记录</div><div class="bowel-list">${todays.map(bowelRowHtml).join('')}</div>`
     : `<div class="empty">📭 今日还没有记录</div>`;
+}
+
+function refreshBowelViews() {
+  if (document.getElementById('pg-bowel-history').classList.contains('active')) {
+    renderBowelHistoryFor(findCondition('gut'));
+  } else {
+    renderBowelTab();
+  }
 }
 
 function buildStoolRow(selected) {
@@ -680,8 +826,9 @@ function toggleIncomplete() {
   document.getElementById('f-incomplete-toggle').className = 'toggle' + (editingIncomplete ? ' on' : '');
 }
 
-function openAddBowel() {
+function openAddBowel(conditionId) {
   editingBowelId = null;
+  editingBowelConditionId = conditionId;
   editingStoolType = ''; editingSticky = 1; editingIncomplete = false;
   document.getElementById('bowelSheetTitle').textContent = '记录排便';
   const now = new Date();
@@ -700,6 +847,7 @@ function openEditBowel(id) {
   const b = S.bowel.find(x => x.id === id);
   if (!b) return;
   editingBowelId = id;
+  editingBowelConditionId = b.conditionId;
   editingStoolType = b.stoolType; editingSticky = b.sticky || 1; editingIncomplete = !!b.incomplete;
   document.getElementById('bowelSheetTitle').textContent = '编辑记录';
   document.getElementById('f-bowel-date').value = b.date;
@@ -724,8 +872,10 @@ function saveBowel() {
   const time = document.getElementById('f-bowel-time').value;
   if (!date || !time) { showToast('请填写日期和时间'); return; }
   const orig = editingBowelId ? S.bowel.find(x => x.id === editingBowelId) : null;
+  const conditionId = editingBowelConditionId || 'gut';
   const entry = {
     id: editingBowelId || 'b' + Date.now(),
+    conditionId,
     date, time,
     ts: new Date(`${date}T${time}`).getTime(),
     stoolType: editingStoolType,
@@ -742,7 +892,7 @@ function saveBowel() {
   save();
   document.getElementById('bowelOverlay').classList.remove('show');
   showToast(orig ? '已保存' : '已记录');
-  renderBowelTab();
+  refreshBowelViews();
 }
 
 function deleteBowel() {
@@ -752,7 +902,7 @@ function deleteBowel() {
   save();
   document.getElementById('bowelOverlay').classList.remove('show');
   showToast('已删除');
-  renderBowelTab();
+  refreshBowelViews();
 }
 
 // ─── Usage stats (meds) ───────────────────────────────
@@ -770,27 +920,13 @@ function medUsageStats(m) {
     const ds = `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`;
     const isSkip = m.every === 2 && daysBetween(m.startDate || ds, ds) % 2 !== 0;
     if (!isSkip) {
-      expected += m.daily;
-      used += Math.min(m.daily, (S.history[ds]||{})[m.id] || 0);
+      const need = medDailyDose(m, ds);
+      expected += need;
+      used += Math.min(need, (S.history[ds]||{})[m.id] || 0);
     }
     d.setDate(d.getDate() + 1);
   }
   return { used, remaining: Math.max(0, expected - used) };
-}
-
-function renderUsage() {
-  const wrap = document.getElementById('usageWrap');
-  if (!S.meds.length) { wrap.innerHTML = '<div class="empty">📭 暂无药品</div>'; return; }
-  wrap.innerHTML = `<div class="usage-card">${S.meds.map(m => {
-    const { used, remaining } = medUsageStats(m);
-    const unit = m.unit || '次';
-    const mult = m.unit ? (m.perDose || 1) : 1;
-    return `<div class="usage-row">
-      <div class="usage-dot" style="background:${m.color}"></div>
-      <div class="usage-name">${m.name}</div>
-      <div class="usage-stat">已用 <b>${used * mult}</b>${unit} · 未用 <b>${remaining * mult}</b>${unit}</div>
-    </div>`;
-  }).join('')}</div>`;
 }
 
 // ─── Trend (meds × bowel) ────────────────────────────
@@ -809,20 +945,21 @@ function dayMedStatus(date) {
   const H = S.history[date];
   if (!H || !Object.keys(H).length) return 'none';
   let hasMeds = false, allDone = true;
-  S.meds.forEach(m => {
+  allMeds().forEach(m => {
     if (m.endDate && date > m.endDate) return;
     const isSkip = m.every === 2 && daysBetween(m.startDate || date, date) % 2 !== 0;
     if (isSkip) return;
     hasMeds = true;
-    if ((H[m.id] || 0) < m.daily) allDone = false;
+    if ((H[m.id] || 0) < medDailyDose(m, date)) allDone = false;
   });
   if (!hasMeds) return 'none';
   return allDone ? 'done' : 'partial';
 }
 
-function renderTrend() {
+function renderTrendFor(cond) {
   const wrap = document.getElementById('trendWrap');
-  if (!S.bowel.length) { wrap.innerHTML = '<div class="empty">📭 暂无排便记录</div>'; return; }
+  const entries = S.bowel.filter(b => b.conditionId === cond.id);
+  if (!entries.length) { wrap.innerHTML = '<div class="empty">📭 暂无排便记录</div>'; return; }
 
   const days = computeTrendDays();
   const W = 320, H = 160, padL = 22, padR = 8, top = 10, bottom = 104, adhY = 118;
@@ -830,9 +967,9 @@ function renderTrend() {
   const yFor = v => bottom - (v - 1) * ((bottom - top) / 4);
 
   const avgs = days.map(d => {
-    const entries = S.bowel.filter(b => b.date === d);
-    if (!entries.length) return null;
-    return entries.reduce((s, b) => s + stoolMeta(b.stoolType).value, 0) / entries.length;
+    const dayEntries = entries.filter(b => b.date === d);
+    if (!dayEntries.length) return null;
+    return dayEntries.reduce((s, b) => s + stoolMeta(b.stoolType).value, 0) / dayEntries.length;
   });
 
   const bands = [
@@ -897,10 +1034,27 @@ function renderTrend() {
   </div>`;
 }
 
-// ─── Meds history (sub-page) ─────────────────────────
+// ─── 吃药记录 (sub-page) ──────────────────────────────
 function renderMedsHistory() {
-  renderUsage();
+  const usageWrap = document.getElementById('usageWrap');
+  let usageHtml = '';
+  S.conditions.forEach(cond => {
+    if (cond.kind !== 'meds' || !cond.meds.length) return;
+    usageHtml += `<div class="sec-label">${cond.icon} ${cond.name}</div><div class="usage-card">${cond.meds.map(m => {
+      const { used, remaining } = medUsageStats(m);
+      const unit = m.unit || '次';
+      const mult = m.unit ? (m.perDose || 1) : 1;
+      return `<div class="usage-row">
+        <div class="usage-dot" style="background:${m.color}"></div>
+        <div class="usage-name">${m.name}</div>
+        <div class="usage-stat">已用 <b>${used * mult}</b>${unit} · 未用 <b>${remaining * mult}</b>${unit}</div>
+      </div>`;
+    }).join('')}</div>`;
+  });
+  usageWrap.innerHTML = usageHtml || '<div class="empty">📭 暂无药品</div>';
+
   const wrap = document.getElementById('medHistWrap');
+  const meds = allMeds();
   const days = Object.keys(S.history).filter(d => Object.keys(S.history[d]).length > 0).sort().reverse();
   if (!days.length) { wrap.innerHTML = '<div class="empty">📭 还没有记录<br>打卡后会显示在这里</div>'; return; }
 
@@ -910,16 +1064,16 @@ function renderMedsHistory() {
     const H = S.history[day];
     const d = new Date(day);
     html += `<div class="hist-day"><div class="hist-date">${d.getMonth()+1}月${d.getDate()}日 周${wk[d.getDay()]}</div><div class="hist-card">`;
-    S.meds.forEach(m => {
+    meds.forEach(m => {
       const done = H[m.id] || 0;
       const ended = m.endDate && day > m.endDate;
-      const epochDay = Math.floor(new Date(day).getTime()/86400000);
-      const isSkip = m.every===2 && epochDay%2!==0;
+      const isSkip = m.every === 2 && daysBetween(m.startDate || day, day) % 2 !== 0;
+      const need = medDailyDose(m, day);
       let icon, count;
       if (ended) { icon='—'; count='已停药'; }
       else if (isSkip) { icon='💤'; count='免服'; }
-      else if (done >= m.daily) { icon='✅'; count=`${done}/${m.daily}`; }
-      else if (done > 0) { icon='⭕'; count=`${done}/${m.daily}`; }
+      else if (done >= need) { icon='✅'; count=`${done}/${need}`; }
+      else if (done > 0) { icon='⭕'; count=`${done}/${need}`; }
       else { icon='❌'; count='未打卡'; }
       html += `<div class="hist-row"><div class="hist-dot" style="background:${m.color}"></div><div class="hist-name">${m.name}</div><div class="hist-count">${count}</div><div class="hist-icon">${icon}</div></div>`;
     });
@@ -928,27 +1082,83 @@ function renderMedsHistory() {
   wrap.innerHTML = html;
 }
 
-// ─── Bowel history (sub-page) ────────────────────────
-function renderBowelHistory() {
-  renderTrend();
+// ─── 排便记录 (sub-page) ──────────────────────────────
+function renderBowelHistoryFor(cond) {
+  renderTrendFor(cond);
   const wrap = document.getElementById('bowelHistWrap');
-  const days = [...new Set(S.bowel.map(b => b.date))].sort().reverse();
+  const entries = S.bowel.filter(b => b.conditionId === cond.id);
+  const days = [...new Set(entries.map(b => b.date))].sort().reverse();
   if (!days.length) { wrap.innerHTML = '<div class="empty">📭 还没有记录<br>记录后会显示在这里</div>'; return; }
 
   const wk = ['日','一','二','三','四','五','六'];
   let html = '';
   days.forEach(day => {
     const d = new Date(day);
-    const bowelForDay = S.bowel.filter(b => b.date === day).sort((a,b) => b.ts - a.ts);
-    html += `<div class="hist-day"><div class="hist-date">${d.getMonth()+1}月${d.getDate()}日 周${wk[d.getDay()]}</div><div class="bowel-list" style="margin:0">${bowelForDay.map(bowelRowHtml).join('')}</div></div>`;
+    const forDay = entries.filter(b => b.date === day).sort((a,b) => b.ts - a.ts);
+    html += `<div class="hist-day"><div class="hist-date">${d.getMonth()+1}月${d.getDate()}日 周${wk[d.getDay()]}</div><div class="bowel-list" style="margin:0">${forDay.map(bowelRowHtml).join('')}</div></div>`;
   });
   wrap.innerHTML = html;
 }
 
-// ─── Settings render ─────────────────────────────────
+// ─── 管理 (sub-page, grouped by condition) ────────────
 function renderSettings() {
-  const list = document.getElementById('medsSettingsList');
-  list.innerHTML = S.meds.map(m => {
+  const body = document.getElementById('medsSettingsBody');
+  let html = '';
+  S.conditions.forEach(cond => {
+    if (cond.kind === 'meds') {
+      html += `
+      <div class="sec-label">${cond.icon} ${cond.name}</div>
+      <div class="settings-section">
+        <div class="settings-card">
+          <div class="settings-row static">
+            <span class="s-name">开始日期</span>
+            <input class="field-input" type="date" style="width:150px;margin:0" value="${cond.startDate||''}" onchange="updateConditionStartDate('${cond.id}', this.value)">
+          </div>
+          <div id="medsList-${cond.id}"></div>
+        </div>
+        <button class="add-btn" onclick="openAddMed('${cond.id}')">＋ 添加到${cond.name}</button>
+      </div>`;
+    } else if (cond.kind === 'braces') {
+      html += `
+      <div class="sec-label">${cond.icon} ${cond.name}</div>
+      <div class="settings-section">
+        <div class="settings-card">
+          <div class="settings-row" onclick="openEditBraces('${cond.id}')">
+            <span class="s-dot" style="background:${cond.color}"></span>
+            <span class="s-name">牙套进度设置</span>
+            <span class="s-meta" id="bracesSettingsMeta"></span>
+            <span class="s-arrow">›</span>
+          </div>
+        </div>
+      </div>`;
+    }
+  });
+  html += `
+  <div class="sec-label">显示顺序</div>
+  <div class="settings-section">
+    <div class="settings-card">
+      <div class="settings-row" onclick="openReorder()">
+        <span class="s-name">调整分组顺序</span>
+        <span class="s-arrow">›</span>
+      </div>
+    </div>
+  </div>`;
+  body.innerHTML = html;
+  S.conditions.forEach(cond => { if (cond.kind === 'meds') renderCondMedsList(cond); });
+  const bracesCond = S.conditions.find(c => c.kind === 'braces');
+  if (bracesCond) updateBracesSettingsMeta(bracesCond.braces);
+}
+
+function updateConditionStartDate(id, val) {
+  findCondition(id).startDate = val;
+  save();
+}
+
+function renderCondMedsList(cond) {
+  const list = document.getElementById('medsList-' + cond.id);
+  if (!list) return;
+  if (!cond.meds.length) { list.innerHTML = '<div class="empty">📭 还没有药品</div>'; return; }
+  list.innerHTML = cond.meds.map(m => {
     const info = m.endDate ? `结束 ${m.endDate}` : '不限疗程';
     return `<div class="settings-row" onclick="openEditMed('${m.id}')">
       <span class="s-dot" style="background:${m.color}"></span>
@@ -957,7 +1167,11 @@ function renderSettings() {
       <span class="s-arrow">›</span>
     </div>`;
   }).join('');
-  renderBraces(); // updates settings meta too
+}
+
+function updateBracesSettingsMeta(b) {
+  const el = document.getElementById('bracesSettingsMeta');
+  if (el) el.textContent = `第${b.currentSet}副 · 共${b.totalSets}副`;
 }
 
 // ─── Med editing ─────────────────────────────────────
@@ -968,9 +1182,78 @@ function buildColorRow(selected) {
   editingColor = selected;
 }
 
-function openAddMed() {
+function renderTaperEditor() {
+  const list = document.getElementById('taperStagesList');
+  list.innerHTML = editingTaperStages.map((s,i) => {
+    const isLast = i === editingTaperStages.length - 1;
+    return `<div class="taper-stage-row">
+      <span class="taper-stage-idx">第${i+1}段</span>
+      ${isLast ? `<span class="taper-stage-forever">之后一直</span>` : `
+      <div class="stepper small">
+        <button class="stepper-btn" onclick="stepTaperDays(${i},-1)">−</button>
+        <span class="stepper-val">${s.days}天</span>
+        <button class="stepper-btn" onclick="stepTaperDays(${i},1)">＋</button>
+      </div>`}
+      <div class="stepper small">
+        <button class="stepper-btn" onclick="stepTaperDaily(${i},-1)">−</button>
+        <span class="stepper-val">${s.daily}次/天</span>
+        <button class="stepper-btn" onclick="stepTaperDaily(${i},1)">＋</button>
+      </div>
+      ${editingTaperStages.length>1 ? `<button class="taper-remove-btn" onclick="removeTaperStage(${i})">✕</button>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function addTaperStage() {
+  const last = editingTaperStages[editingTaperStages.length-1];
+  editingTaperStages.push({ days:7, daily: last ? Math.max(1,last.daily-1) : 3 });
+  renderTaperEditor();
+}
+
+function removeTaperStage(i) {
+  if (editingTaperStages.length <= 1) return;
+  editingTaperStages.splice(i,1);
+  renderTaperEditor();
+}
+
+function stepTaperDays(i,d) {
+  editingTaperStages[i].days = Math.max(1, Math.min(60, editingTaperStages[i].days+d));
+  renderTaperEditor();
+}
+
+function stepTaperDaily(i,d) {
+  editingTaperStages[i].daily = Math.max(1, Math.min(12, editingTaperStages[i].daily+d));
+  renderTaperEditor();
+}
+
+function toggleDoseMode() {
+  editingDoseMode = editingDoseMode === 'taper' ? 'fixed' : 'taper';
+  document.getElementById('f-dosemode-toggle').className = 'toggle' + (editingDoseMode==='taper'?' on':'');
+  document.getElementById('fixedDoseField').style.display = editingDoseMode==='taper'?'none':'';
+  document.getElementById('taperField').style.display = editingDoseMode==='taper'?'':'none';
+  if (editingDoseMode === 'taper' && !editingTaperStages.length) {
+    editingTaperStages = [{days:7,daily:4},{days:7,daily:3},{days:7,daily:2}];
+  }
+  renderTaperEditor();
+}
+
+function onOpenDateChange() {
+  const has = !!document.getElementById('f-openDate').value;
+  document.getElementById('shelfDaysField').style.display = has ? '' : 'none';
+}
+
+function stepShelfDays(d) {
+  editingShelfDays = Math.max(1, Math.min(365, editingShelfDays + d));
+  document.getElementById('f-shelfDays-val').textContent = editingShelfDays;
+}
+
+function openAddMed(conditionId) {
   editingMedId = null;
-  editingDaily = 2; editingEvery = 1; editingColor = '#007aff'; editingAmount = 1;
+  editingConditionId = conditionId;
+  const cond = findCondition(conditionId);
+  editingDaily = 2; editingEvery = 1; editingColor = cond.color; editingAmount = 1;
+  editingDoseMode = 'fixed'; editingTaperStages = [{days:7,daily:4},{days:7,daily:3},{days:7,daily:2}];
+  editingShelfDays = 30;
   document.getElementById('sheetTitle').textContent = '添加新药品';
   document.getElementById('f-name').value = '';
   document.getElementById('f-desc').value = '';
@@ -980,16 +1263,30 @@ function openAddMed() {
   document.getElementById('f-endDate').value = '';
   document.getElementById('f-startDate').value = todayStr();
   document.getElementById('f-every-toggle').className = 'toggle';
+  document.getElementById('f-dosemode-toggle').className = 'toggle';
+  document.getElementById('fixedDoseField').style.display = '';
+  document.getElementById('taperField').style.display = 'none';
+  renderTaperEditor();
+  document.getElementById('f-openDate').value = '';
+  document.getElementById('shelfDaysField').style.display = 'none';
+  document.getElementById('f-shelfDays-val').textContent = editingShelfDays;
   document.getElementById('delLink').style.display = 'none';
   buildColorRow(editingColor);
   document.getElementById('medOverlay').classList.add('show');
 }
 
 function openEditMed(id) {
-  const m = S.meds.find(x => x.id === id);
+  const m = findMed(id);
   if (!m) return;
+  const cond = findMedCondition(id);
   editingMedId = id;
+  editingConditionId = cond.id;
   editingDaily = m.daily; editingEvery = m.every || 1; editingColor = m.color; editingAmount = m.perDose || 1;
+  editingDoseMode = m.doseMode || 'fixed';
+  editingTaperStages = (m.taperStages && m.taperStages.length)
+    ? JSON.parse(JSON.stringify(m.taperStages))
+    : [{days:7,daily:4},{days:7,daily:3},{days:7,daily:2}];
+  editingShelfDays = m.shelfDays || 30;
   document.getElementById('sheetTitle').textContent = '编辑药品';
   document.getElementById('f-name').value = m.name;
   document.getElementById('f-desc').value = m.desc || '';
@@ -999,6 +1296,13 @@ function openEditMed(id) {
   document.getElementById('f-endDate').value = m.endDate || '';
   document.getElementById('f-startDate').value = m.startDate || '';
   document.getElementById('f-every-toggle').className = 'toggle' + (editingEvery===2?' on':'');
+  document.getElementById('f-dosemode-toggle').className = 'toggle' + (editingDoseMode==='taper'?' on':'');
+  document.getElementById('fixedDoseField').style.display = editingDoseMode==='taper'?'none':'';
+  document.getElementById('taperField').style.display = editingDoseMode==='taper'?'':'none';
+  renderTaperEditor();
+  document.getElementById('f-openDate').value = m.openDate || '';
+  document.getElementById('shelfDaysField').style.display = m.openDate ? '' : 'none';
+  document.getElementById('f-shelfDays-val').textContent = editingShelfDays;
   document.getElementById('delLink').style.display = 'block';
   buildColorRow(editingColor);
   document.getElementById('medOverlay').classList.add('show');
@@ -1046,45 +1350,54 @@ function saveMed() {
   if (editingEvery === 2 && !document.getElementById('f-startDate').value) {
     showToast('请填写开始日期'); return;
   }
+  if (editingDoseMode === 'taper' && !document.getElementById('f-startDate').value) {
+    showToast('阶梯递减需要填写开始日期'); return;
+  }
   const med = {
     id: editingMedId || 'm' + Date.now(),
     name,
     desc: document.getElementById('f-desc').value.trim(),
     color: editingColor,
-    daily: editingDaily,
+    doseMode: editingDoseMode,
+    daily: editingDoseMode === 'taper' ? editingTaperStages[0].daily : editingDaily,
+    taperStages: editingDoseMode === 'taper' ? editingTaperStages.map(s => ({...s})) : [],
     perDose: editingAmount,
     unit: document.getElementById('f-unit').value.trim(),
     endDate: document.getElementById('f-endDate').value || '',
     startDate: document.getElementById('f-startDate').value || '',
     every: editingEvery,
+    openDate: document.getElementById('f-openDate').value || '',
+    shelfDays: editingShelfDays,
   };
+  const cond = findCondition(editingConditionId);
   if (editingMedId) {
-    const idx = S.meds.findIndex(x => x.id === editingMedId);
-    if (idx > -1) S.meds[idx] = med;
+    const idx = cond.meds.findIndex(x => x.id === editingMedId);
+    if (idx > -1) cond.meds[idx] = med;
   } else {
-    S.meds.push(med);
+    cond.meds.push(med);
   }
   save();
   document.getElementById('medOverlay').classList.remove('show');
   showToast(editingMedId ? '已保存' : '药品已添加');
-  renderSettings();
-  renderMedsToday();
+  renderCondMedsList(cond);
 }
 
 function deleteMed() {
   if (!editingMedId) return;
   if (!confirm('确定删除这个药品吗？打卡记录也会保留但不再显示。')) return;
-  S.meds = S.meds.filter(m => m.id !== editingMedId);
+  const cond = findCondition(editingConditionId);
+  cond.meds = cond.meds.filter(m => m.id !== editingMedId);
   save();
   document.getElementById('medOverlay').classList.remove('show');
   showToast('已删除');
-  renderSettings();
-  renderMedsToday();
+  renderCondMedsList(cond);
 }
 
 // ─── Braces editing ──────────────────────────────────
-function openEditBraces() {
-  bracesTemp = { ...S.braces };
+function openEditBraces(conditionId) {
+  editingBracesConditionId = conditionId;
+  const cond = findCondition(conditionId);
+  bracesTemp = { ...cond.braces };
   document.getElementById('b-cur-val').textContent = bracesTemp.currentSet;
   document.getElementById('b-days-val').textContent = bracesTemp.daysPerSet;
   document.getElementById('b-total-val').textContent = bracesTemp.totalSets;
@@ -1106,12 +1419,49 @@ function stepBraces(field, d) {
 function saveBraces() {
   bracesTemp.setStartDate = document.getElementById('b-startDate').value;
   if (!bracesTemp.setStartDate) { showToast('请选择本副开始日期'); return; }
-  S.braces = { ...bracesTemp };
+  const cond = findCondition(editingBracesConditionId);
+  cond.braces = { ...bracesTemp };
   save();
   document.getElementById('bracesOverlay').classList.remove('show');
   showToast('牙套设置已保存');
+  updateBracesSettingsMeta(cond.braces);
+}
+
+// ─── Reorder groups ───────────────────────────────────
+function openReorder() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('pg-reorder').classList.add('active');
+  document.getElementById('tabbar').style.display = 'none';
+  renderReorderList();
+}
+
+function closeReorder() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('pg-meds-settings').classList.add('active');
   renderSettings();
-  renderMedsToday();
+}
+
+function renderReorderList() {
+  const items = S.conditions.filter(c => c.kind !== 'bowel');
+  document.getElementById('reorderList').innerHTML = items.map((c,i) => `
+    <div class="settings-row static">
+      <span class="s-dot" style="background:${c.color}"></span>
+      <span class="s-name">${c.icon} ${c.name}</span>
+      <button class="reorder-btn" onclick="moveCondition('${c.id}',-1)" ${i===0?'disabled':''}>↑</button>
+      <button class="reorder-btn" onclick="moveCondition('${c.id}',1)" ${i===items.length-1?'disabled':''}>↓</button>
+    </div>`).join('');
+}
+
+function moveCondition(id, dir) {
+  const items = S.conditions.filter(c => c.kind !== 'bowel');
+  const idx = items.findIndex(c => c.id === id);
+  const j = idx + dir;
+  if (j < 0 || j >= items.length) return;
+  const fullIdxA = S.conditions.findIndex(c => c.id === items[idx].id);
+  const fullIdxB = S.conditions.findIndex(c => c.id === items[j].id);
+  [S.conditions[fullIdxA], S.conditions[fullIdxB]] = [S.conditions[fullIdxB], S.conditions[fullIdxA]];
+  save();
+  renderReorderList();
 }
 
 // ─── Nav ────────────────────────────────────────────
@@ -1133,7 +1483,7 @@ function openSubPage(name) {
   document.getElementById('tabbar').style.display = 'none';
   if (name === 'meds-history') renderMedsHistory();
   if (name === 'meds-settings') renderSettings();
-  if (name === 'bowel-history') renderBowelHistory();
+  if (name === 'bowel-history') renderBowelHistoryFor(findCondition('gut'));
 }
 
 function closeSubPage() {
